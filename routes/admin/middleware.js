@@ -82,7 +82,7 @@ module.exports = {
             setTimeout(function(){
                 try{
                     console.log('forever restart');
-                    if(gloabal.restart.task){
+                    if(gloabal.restartTask){
                         return ;
                     }
                     
