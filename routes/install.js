@@ -9,6 +9,7 @@ var mysql = require('mysql');
 var updateconfigs = require(`${__dirname.replace('routes','')}/utils/updateconfigs`);
 var connect = require(`${__dirname.replace('routes','')}/utils/connect`);
 var dataFile = fs.readFileSync(`${__dirname.replace('routes','')}utils/install/original.json`,'utf-8');
+var updaterouter = require(`${__dirname.replace('routes','utils')}/updaterouter`);
 
 module.exports = {
     index:function(req, res, next) {
@@ -378,8 +379,7 @@ module.exports = {
             }
 
             //update dynamic routes
-            require(`${__dirname.replace('routes','utils')}/updaterouter`)()
-            
+            updaterouter();
             resolve();
 
         } ) ).then( () => new Promise( (resolve,reject) => {

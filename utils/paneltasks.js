@@ -7,8 +7,10 @@ var md5 = require('md5');
 var isMd5 = require('is-md5');
 var fs = require('fs');
 var fse = require('fs-extra');
+var updaterouter = require(`${__dirname}/updaterouter`);
 
 var cityjson = 'http://pv.sohu.com/cityjson?ie=utf-8';
+
 
 module.exports = function(){
     var startTime = new Date().getTime();
@@ -190,7 +192,7 @@ module.exports = function(){
     
     //update dynamicRoutes
     ( () => new Promise( (resolve,reject) => {
-        require(`${__dirname}/updaterouter`)()
+        updaterouter();
         resolve();
     } ) )().then( () => new Promise( (resolve,reject) => {
         console.log(`task "update dynamic routes" is completed ==> (${new Date().getTime() - startTime} (ms))`);
