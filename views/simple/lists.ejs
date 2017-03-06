@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %> - <%= system.sitename %></title>
+        <link rel='stylesheet' href='<%= path %>assets/img/style.css' />
+        
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-touch-fullscreen" content="yes">
+		<meta name="keywords" content="<%= system.keywords %>" />
+		<meta name="description" content="<%= system.description %>" />
+
+        <link rel="apple-touch-icon" sizes="76x76" href="<%= system.icon %>">
+        <link rel="apple-touch-icon" sizes="120x120" href="<%= system.icon %>">
+        <link rel="apple-touch-icon" sizes="152x152" href="<%= system.icon %>">
+        <link rel="apple-touch-icon" sizes="180x180" href="<%= system.icon %>">
+
+        <link rel="icon" sizes="192x192" href="<%= system.icon %>">
+        <link rel="icon" sizes="128x128" href="<%= system.icon %>">
+        
+    </head>
+    <body>
+        <div id="container">
+            <%- include header %>
+            <div id="main">
+                <div id="lists">
+                    <div class="wrap">
+                        <ul class="ele-parallax" data-fric=".3"><% infomations.contents.forEach(function(d,i){ %><% 
+                                var url = '',
+                                    chunk = '',
+                                    article = d.router ? d.router : (d.model+'-'+d.id);
+
+                                position.forEach(function(o){
+                                    chunk += '/'+o.router;
+                                });
+
+                                url = chunk+'/'+article;
+                            %><li class="item float" data-fric="<%= Math.random() %>">
+                                <a href="<%= url %>">
+                                    <div class="item_infomation_img">
+                                        <img src="<%= d['field_4'] %>" alt="<%= d['field_1'] %>" />
+                                    </div>
+                                    <div class="item_infomation">
+                                        <div class="table">
+                                            <div class="cell">
+                                                <h2><%= d['title'] %></h2>
+                                                <h3><%= d['field_1'] %></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li><% }); %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <script src="/lib/jquery.min.js"></script>
+        <script src="/lib/tween.verdor.js"></script>
+        <script src="/lib/parallax.js"></script>
+        <script>
+            var global = {};
+            var nowPage;
+            global.page = <%- JSON.stringify(infomations.pageContainer); %>
+            global.page.forEach(function(d){
+                if(d.current){
+                    nowPage = d.val;
+                }
+            });
+            var scrollLock = true;
+        </script>
+        <script src="<%= path %>js/app.js"></script>
+    </body>
+</html>

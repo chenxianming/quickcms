@@ -1,0 +1,126 @@
+#!/usr/bin/env node
+
+var execSync = require('child_process').execSync;
+var exec = require('child_process').exec;
+var program = require('commander');
+var fs = require('fs');
+var updateConfig = require('../utils/updateconfigs.js');
+
+
+function randomStr(length){
+    var length = length || 20,
+        str = 'abcdefghijklnmopqrstuvwxyz1234567890';
+    
+    var arr = str.split('');
+    
+    var chunk = '';
+    for(var i = 0;i<arr.length;i++){
+        var t = arr[~~(Math.random() * arr.length-1)],
+            T = Math.random() < .5 ? t : t.toLocaleUpperCase();
+        chunk += T;
+    }
+    
+    return chunk;
+}
+
+program
+  .version(require('../package').version)
+  .option('-i, --init', '初始化QuickCms并附上端口号,默认为3000')
+  .option('-s, --start', '运行QuickCms')
+  .option('-e, --end', '停止运行QuickCms')
+  .option('-r, --restart', '重启QuickCms')
+  .parse(process.argv);
+  
+if(!program.init && !program.start && !program.end && !program.restart){
+    return program.help();
+}
+
+if(program.init){
+    var port = program.args[0] * 1 || 3000;
+    
+    var randomSession = randomStr(20);
+    
+    ( () => new Promise( (resolve,reject) => {
+    
+        updateConfig({
+            port:port,
+            sessionKey:randomSession
+        });
+        resolve();
+        
+    } ) )().then( ()=>new Promise( (resolve,reject) => {
+        
+        var code = `module.exports = function(router){}`;
+        
+        var dynamicRoutePath = `${__dirname.replace('bin','utils')}/dynamicRoutes.js`;
+        var cookiesJar = `${__dirname.replace('bin','utils')}/cookies.json`;
+        
+        if(fs.existsSync(dynamicRoutePath)){
+            fs.unlinkSync(dynamicRoutePath);
+        }
+        
+        fs.writeFileSync(dynamicRoutePath,code,'utf-8');
+        fs.writeFileSync(cookiesJar,'','utf-8');
+        
+        resolve();
+        
+    } ) ).then( () => new Promise( (resolve,reject) => {
+        var logs = ['error.log','logfile.log','output.log'],
+            tempPath = __dirname.replace('bin','temp');
+        
+        if(!fs.existsSync(tempPath)){
+            fs.mkdirSync(tempPath);
+        }
+        
+        logs.forEach(function(d){
+            fs.writeFileSync(tempPath+'/'+d,' ','utf-8');
+        });
+        
+        resolve();
+        
+    } ) ).then( ()=>new Promise( () => {
+        console.log(`初始化QuickCms成功,请再次运行./quickcms -s 或者直接运行./www`);
+    } ) );
+}
+
+if(program.start){
+    
+    ( () => new Promise( (resolve,reject) => {
+    
+        try{
+            execSync(`forever start -a -l ${__dirname.replace('bin','temp/logfile.log')} -o ${__dirname.replace('bin','temp/output.log')} -e ${__dirname.replace('bin','temp/error.log')} ${__dirname}/www`);
+        }catch(e){
+            console.log('发生错误,请确定您的用户运行权限,尝试sudo运行');
+        }
+        
+        resolve();
+    } ) )().then( ()=>new Promise( () => {
+        console.log(`已运行,请在浏览器访问 http://127.0.0.1:${require('../configs.js').port}`);
+    } ) );
+    
+}
+
+if(program.end){
+    try{
+        execSync(`forever stop ${__dirname}/www`);
+        console.log(`已停止运行`);
+    }catch(e){
+
+    }
+}
+
+if(program.restart){
+
+    ( () => new Promise( (resolve,reject) => {
+        try{
+            execSync(`forever restart ${__dirname}/www`);
+        }catch(e){
+            console.log('发生错误,请确定您的用户运行权限,尝试sudo运行');
+        }
+        
+        resolve();
+    } ) )().then( ()=>new Promise( () => {
+        console.log(`已重启`);
+    } ) )
+    
+}

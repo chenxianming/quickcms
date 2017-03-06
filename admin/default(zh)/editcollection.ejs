@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include header %>
+<body>
+    <div id="navigator">
+        <div class="logo">
+            <a href="/panel">
+                <em class="nl1"></em>
+                <em class="nl2"></em>
+                <em class="nl3"></em>
+                <i class="material-icons">slow_motion_video</i>
+            </a>
+        </div>
+        <div class="navigator">
+            <ul>
+                <li>
+                    <a href="/panel/system">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>系统</span>
+                    </a>
+                </li>
+                <li class="cur">
+                   <a href="/panel/contents">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>内容</span>
+                   </a>
+                </li>
+                <li>
+                   <a href="/panel/users">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>用户</span>
+                   </a>
+                </li>
+                <li>
+                   <a href="/panel/styles">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>样式</span>
+                   </a>
+                </li>
+                <li>
+                   <a href="/panel/extensions">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>拓展</span>
+                   </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+<% include brand %>
+    
+    <div class="container">
+        <div class="ct">
+            <div class="contents_menu">
+                <div class="contents_title"><a href="/panel/contents/collections"><i class="material-icons">apps</i><span>列表集 - 编辑</span></a></div><ul>
+                    <li><a href="/panel/contents/media"><i class="material-icons">video_library</i><span>媒体库</span></a></li><li><a href="/panel/contents/model"><i class="material-icons">insert_drive_file</i><span>模型</span></a></li><li><a href="/panel/contents/categories"><i class="material-icons">menu</i><span>分类</span></a></li><li><a href="/panel/contents/comments"><i class="material-icons">comment</i><span>留言</span></a></li>
+                </ul>
+            </div>
+            
+            <div style="width:800px;">
+                <div class="infomation fl">
+                    <div class="pd20">
+                        编辑列表集
+                    </div>
+                </div>
+                <div class="remove_collection red_btn fr" style="margin-top:10px;" data-guid="<%= infomations.collection.guid %>">删除</div>
+                <div class="clear"></div>
+            </div>
+            
+            <div class="edit_collection">
+                <div class="new_collection_editor metro">
+                    <dl data-key="name">
+                        <dt>名称</dt><dd>
+                            <div class="pd15">
+                                <input class="insert" value="<%= infomations.collection.name %>" placeholder="名称" type="text"><span class="red">*</span>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                    <dl data-key="guid">
+                        <dt>GUID</dt><dd>
+                            <div class="pd15">
+                                <input class="insert" disabled="true" value="<%= infomations.collection.guid %>" placeholder="GUID必须为唯一标识" type="text"><span class="red">*</span>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                    <dl data-key="styles">
+                        <dt>样式</dt><dd>
+                            <div class="pd15">
+                                <div class="menu_selected">
+                                    <dl class="ct_group">
+                                        <% var style;infomations.styles.forEach(function(d){ if(d==infomations.collection.style){ style = d; } }); %>
+                                        <dt data-value="<%= style %>"><span><%= style %></span><i class="material-icons">keyboard_arrow_down</i></dt>
+                                        <dd>
+                                            <ul>
+                                                <% infomations.styles.forEach(function(d){ %>
+                                                <li data-value="<%= d %>"><%= d %></li>
+                                                <% }) %>
+                                            </ul>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                    <dl data-key="model">
+                        <dt>默认模型</dt><dd>
+                            <div class="pd15">
+                                <div class="menu_selected">
+                                    <dl class="ct_group">
+                                        <% var defaultModel; infomations.models.forEach(function(d){ if(d.guid==infomations.collection.defaultmodel){ defaultModel = d; } }) %>
+                                        <dt data-value="<%= defaultModel.guid %>"><span><%= defaultModel.name %></span><i class="material-icons">keyboard_arrow_down</i></dt>
+                                        <dd>
+                                            <ul>
+                                                <% infomations.models.forEach(function(d){ %>
+                                                <li data-value="<%= d.guid %>"><%= d.name %></li>
+                                                <% }) %>
+                                            </ul>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                    
+                </div>
+                <div class="new_collection_submit">
+                    <a class="fr blue_btn" href="#">保存</a>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script>
+        var model = '<%= infomations.model %>';
+    </script>
+    
+    <%- include footer %>
+</body>
+</html>

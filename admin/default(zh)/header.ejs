@@ -1,0 +1,14 @@
+<link href="/admin/<%= assets %>/img/style.css" rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta name="description" content="quickcms" />
+<title><%= title %> - QuickCms</title>
+<link rel="icon" sizes="128x128" href="/admin/<%= assets %>/img/icon.png">
+<script>
+    try{
+        document.createElement('canvas').getContext('2d')
+    }catch(e){
+        location.href = '/browsernotsupport';
+    }
+</script>
+<script src="/lib/jquery.min.js"></script>

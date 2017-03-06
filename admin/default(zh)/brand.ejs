@@ -1,0 +1,12 @@
+    <div class="brand">
+        <div class="welcome">
+            <a href="/panel/users/person"><img src="<%= infomations.useravatar || `/admin/${assets}/img/avatar.png` %>" /></a>
+            <span>欢迎,<b><%= infomations.username %></b>(<%= infomations.groupsName %>)</span>
+        </div>
+        <div class="menu">
+            <ul>
+                <li><a href="/" target="_blank"><i class="material-icons">web</i><span>网站</span></a></li>
+                <li><a href="/panel/logout"><i class="material-icons">open_in_new</i><span>注销</span></a></li>
+            </ul>
+        </div>
+    </div>

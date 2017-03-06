@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include header %>
+<body>
+    <div id="navigator">
+        <div class="logo">
+            <a href="/panel">
+                <em class="nl1"></em>
+                <em class="nl2"></em>
+                <em class="nl3"></em>
+                <i class="material-icons">slow_motion_video</i>
+            </a>
+        </div>
+        <div class="navigator">
+            <ul>
+                <li>
+                    <a href="/panel/system">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>系统</span>
+                    </a>
+                </li>
+                <li>
+                   <a href="/panel/contents">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>内容</span>
+                   </a>
+                </li>
+                <li class="cur">
+                   <a href="/panel/users">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>用户</span>
+                   </a>
+                </li>
+                <li>
+                   <a href="/panel/styles">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>样式</span>
+                   </a>
+                </li>
+                <li>
+                   <a href="/panel/extensions">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>拓展</span>
+                   </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+<% include brand %>
+    
+    <div class="container">
+        <div class="ct">
+            <div class="contents_menu">
+                <div class="contents_title"><a href="/panel/groups"><i class="material-icons">group</i><span>用户组</span></a></div><ul>
+                    <li><a href="/panel/users"><i class="material-icons">person</i><span>用户</span></a></li><li><a href="/panel/users/person"><i class="material-icons">assignment_ind</i><span>个人</span></a></li>
+                </ul>
+            </div>
+            
+            <div class="infomation">
+                <div class="pd20">
+                    新增，修改用户组权限
+                </div>
+            </div>
+            
+            <div class="groups">
+                <% infomations.groups.forEach(function(d,i){ %><div class="items">
+                    <h4 class="blue"><%= d.name %></h4>
+                    <% if(d.guid!='administrator'){ %>
+                    <div class="items_actions">
+                        <ul>
+                            <li><a href="/panel/groups/edit?guid=<%= d.guid %>"><i class="material-icons">border_color</i><span>编辑</span></a></li>
+                            <li><a class="remove_gp" href="#" data-guid="<%= d.guid %>"><i class="material-icons">delete</i><span>删除</span></a></li>
+                        </ul>
+                    </div>
+                    <% } %>
+                </div><% }); %>
+            </div>
+            
+            <div class="new_groups">
+                <a class="fr blue_btn" href="/panel/groups/new">新增</a>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    
+    <%- include footer %>
+</body>
+</html>

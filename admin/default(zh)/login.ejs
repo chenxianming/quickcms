@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include header %>
+<body>
+    <div id="login">
+        <form action="/panel/login" method="post">
+        <h2><span>欢迎使用QuickCms</span></h2>
+        <div class="metro login_input">
+            <div class="pd20">
+                <div class="login_text"><input class="insert" name="username" type="text" placeholder="用户" /></div>
+            </div>
+        </div>
+        <div class="metro login_input">
+            <div class="pd20">
+                <div class="login_text"><input class="insert" name="password" type="password" placeholder="密码" /></div>
+            </div>
+        </div>
+        <div class="login_submit">
+            <input type="submit" value="登录" />
+        </div>
+        </form>
+    </div>
+    
+    <%- include footer %>
+</body>
+</html>

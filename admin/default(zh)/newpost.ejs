@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include header %>
+<link href="/admin/<%= assets %>/img/wangEditor.css" rel="stylesheet">
+<link href="/admin/<%= assets %>/img/simple-dateselector.css" rel="stylesheet">
+<body>
+    <div id="navigator">
+        <div class="logo">
+            <a href="/panel">
+                <em class="nl1"></em>
+                <em class="nl2"></em>
+                <em class="nl3"></em>
+                <i class="material-icons">slow_motion_video</i>
+            </a>
+        </div>
+        <div class="navigator">
+            <ul>
+                <li>
+                    <a href="/panel/system">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>系统</span>
+                    </a>
+                </li>
+                <li class="cur">
+                   <a href="/panel/contents">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>内容</span>
+                   </a>
+                </li>
+                <li>
+                   <a href="/panel/users">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>用户</span>
+                   </a>
+                </li>
+                <li>
+                   <a href="/panel/styles">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>样式</span>
+                   </a>
+                </li>
+                <li>
+                   <a href="/panel/extensions">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>拓展</span>
+                   </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+<% include brand %>
+    
+    <div class="container">
+        <div class="ct">
+            <div class="contents_menu">
+                <div class="contents_title"><a href="/panel/contents"><i class="material-icons">insert_drive_file</i><span><%= infomations.info.name %> - 新增</span></a></div><ul>
+                    <li><a href="/panel/contents/media"><i class="material-icons">video_library</i><span>媒体库</span></a></li><li><a href="/panel/contents/model"><i class="material-icons">insert_drive_file</i><span>模型</span></a></li><li><a href="/panel/contents/categories"><i class="material-icons">menu</i><span>分类</span></a></li><li><a href="/panel/contents/comments"><i class="material-icons">comment</i><span>留言</span></a></li>
+                </ul>
+            </div>
+            
+            <div class="infomation">
+                <div class="pd20">
+                    内容模型定义了内容需要的属性
+                </div>
+            </div>
+            <div class="post_new">
+                <div class="model_editor metro">
+                    <dl>
+                        <dt><i class="material-icons">menu</i><span>分类</span></dt><dd>
+                            <div class="pd15" data-s="name">
+                                <div class="select_categories"></div>
+                                <div class="select_categories_info"></div>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                    <dl>
+                        <dt><i class="material-icons">title</i><span>标题</span></dt><dd>
+                            <div class="pd15" data-s="title">
+                                <input class="insert" value="" placeholder="网站标题" type="text" /><span class="red">*</span>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                    <dl>
+                        <dt><i class="material-icons">access_time</i><span>时间</span></dt><dd>
+                            <div class="pd15" data-s="date">
+                                <div class="simpledateselector">
+                                    <input class="insert" value="" placeholder="发布时间" type="text" /><span class="red">*</span>
+                                </div>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                    <dl>
+                        <dt><i class="material-icons">device_hub</i><span>路由</span></dt><dd>
+                            <div class="pd15" data-s="router">
+                                <input class="insert" value="" placeholder="用作内容url，只能填写英文" type="text" />
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                    <% infomations.datas.forEach(function(d,i){ %>
+                        <% if(d.type=='form'){ %>
+                    <dl class="custom_field" data-id="<%= d.id %>">
+                        <dt><span><%= d.name %></span></dt><dd>
+                            <div class="pd15 field_type" data-s="form">
+                                <input class="insert" value="" placeholder="请填写<%= d.name %>" type="text" />
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                        <% } %>
+                        <% if(d.type=='d-form'){ %>
+                    <dl class="custom_field" data-id="<%= d.id %>">
+                        <dt><span><%= d.name %></span></dt><dd>
+                            <div class="pd15 field_type" data-s="d-form">
+                                <input class="insert d_value" value="" placeholder="请填写<%= d.name %>" type="text"><div class="form_unit"><span><%= d.value %></span></div>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                        <% } %>
+                        <% if(d.type=='media'){ %>
+                    <dl class="custom_field" data-id="<%= d.id %>">
+                        <dt><span><%= d.name %></span></dt><dd>
+                            <div class="pd15 field_type" data-s="media">
+                                <div class="media_input small">
+                                    <input class="insert" name="icon" type="text" placeholder="从媒体库中选择文件" value="" />
+                                    <div class="media_input_btn"><i class="material-icons">subscriptions</i></div>
+                                </div>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                        <% } %>
+                        <% if(d.type=='media-l'){ %>
+                    <dl class="custom_field" data-id="<%= d.id %>">
+                        <dt><span>内容图</span></dt><dd>
+                            <div class="pd15 field_type" data-s="media-l">
+                                <div class="media_options">
+                                    <div class="media_add"><i class="material-icons">add</i><span>添加选项</span></div>
+                                </div>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                        <% } %>
+                        <% if(d.type=='checkbox'){ %>
+                    <dl class="custom_field" data-id="<%= d.id %>">
+                        <dt><span><%= d.name %></span></dt><dd>
+                            <div class="pd15 field_type" data-s="checkbox">
+                                <h4><i class="material-icons">radio_button_checked</i><span>单选</span>
+                                <% if(d.filter){ %>
+                                <span class="green">该字段检索为"fd<%= d.id %>-<em></em>"</span> (只有在同一分类下的模型类型都相同时,才能使用筛选)
+                                <% } %>
+                                </h4>
+                                <% var arr = d.value.split(','); %>
+                                
+                                <div>
+                                <% arr.forEach(function(p){ %>
+                                    <% if(!p){ return ; } %>
+                                    <div class="form_check"><i><b></b></i><span><%= p %></span></div>
+                                <% }) %>
+                                </div>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                        <% } %>
+                        <% if(d.type=='options'){ %>
+                   <dl class="custom_field" data-id="<%= d.id %>">
+                        <dt><span><%= d.name %></span></dt><dd>
+                            <div class="pd15 field_type" data-s="options">
+                                <h4><i class="material-icons">check_box</i><span>多选</span></h4>
+                                <% var arr = d.value.split(','); %>
+                                <% arr.forEach(function(p){ %>
+                                    <% if(!p){ return ; } %>
+                                    <div class="form_check"><i><b></b></i><span><%= p %></span></div>
+                                <% }) %>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                        <% } %>
+                        <% if(d.type=='content'){ %>
+                    <dl class="custom_field" data-id="<%= d.id %>">
+                        <dt><span><%= d.name %></span></dt><dd>
+                            <div class="pd15 field_type" data-s="content">
+                                <div class="wang_editor">
+                                    <p>请输入内容...</p>
+                                </div>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                        <% } %>
+                        
+                    <% }) %>
+
+                    <dl>
+                        <dt><span>关键字</span></dt><dd>
+                            <div class="pd15" data-s="keywords">
+                                <ul><input class="insert" type="text" placeholder="输入关键字" value="" /></ul>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                </div>
+
+                <div class="submit">
+                    <span class="fr newpost_btn">发表</span>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script>
+        var categories = <%- infomations.categories %>;
+        var guid = "<%- infomations.guid %>";
+        var model = "<%- infomations.model %>";
+    </script>
+    <%- include footer %>
+    <script src="/lib/simple-dateselector.js"></script>
+    <script src="/lib/wangEditor.js"></script>
+    <script>
+        $(function(){
+            $('.wang_editor').each(function(){
+                var rdmId = `editor${~~(Math.random() * 10000)}`;
+                $(this).attr('id',rdmId);
+                var editor = new wangEditor(rdmId);
+                editor.config.emotions = {
+                    'weibo': {
+                        title: '微博表情',
+                        data: [{
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif",
+                                    value : "[草泥马]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif",
+                                    value : "[神马]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif",
+                                    value : "[浮云]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c9/geili_thumb.gif",
+                                    value : "[给力]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f2/wg_thumb.gif",
+                                    value : "[围观]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/vw_thumb.gif",
+                                    value : "[威武]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6e/panda_thumb.gif",
+                                    value : "[熊猫]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/81/rabbit_thumb.gif",
+                                    value : "[兔子]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/otm_thumb.gif",
+                                    value : "[奥特曼]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/15/j_thumb.gif",
+                                    value : "[囧]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/89/hufen_thumb.gif",
+                                    value : "[互粉]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c4/liwu_thumb.gif",
+                                    value : "[礼物]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/ac/smilea_thumb.gif",
+                                    value : "[呵呵]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/0b/tootha_thumb.gif",
+                                    value : "[嘻嘻]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6a/laugh.gif",
+                                    value : "[哈哈]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/14/tza_thumb.gif",
+                                    value : "[可爱]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/af/kl_thumb.gif",
+                                    value : "[可怜]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/a0/kbsa_thumb.gif",
+                                    value : "[挖鼻屎]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f4/cj_thumb.gif",
+                                    value : "[吃惊]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6e/shamea_thumb.gif",
+                                    value : "[害羞]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c3/zy_thumb.gif",
+                                    value : "[挤眼]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/29/bz_thumb.gif",
+                                    value : "[闭嘴]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/71/bs2_thumb.gif",
+                                    value : "[鄙视]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6d/lovea_thumb.gif",
+                                    value : "[爱你]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/9d/sada_thumb.gif",
+                                    value : "[泪]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/19/heia_thumb.gif",
+                                    value : "[偷笑]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/8f/qq_thumb.gif",
+                                    value : "[亲亲]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/b6/sb_thumb.gif",
+                                    value : "[生病]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/58/mb_thumb.gif",
+                                    value : "[太开心]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/17/ldln_thumb.gif",
+                                    value : "[懒得理你]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/98/yhh_thumb.gif",
+                                    value : "[右哼哼]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6d/zhh_thumb.gif",
+                                    value : "[左哼哼]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/a6/x_thumb.gif",
+                                    value : "[嘘]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/af/cry.gif",
+                                    value : "[衰]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/73/wq_thumb.gif",
+                                    value : "[委屈]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/9e/t_thumb.gif",
+                                    value : "[吐]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f3/k_thumb.gif",
+                                    value : "[打哈欠]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/27/bba_thumb.gif",
+                                    value : "[抱抱]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7c/angrya_thumb.gif",
+                                    value : "[怒]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/5c/yw_thumb.gif",
+                                    value : "[疑问]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/a5/cza_thumb.gif",
+                                    value : "[馋嘴]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/88_thumb.gif",
+                                    value : "[拜拜]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/e9/sk_thumb.gif",
+                                    value : "[思考]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/24/sweata_thumb.gif",
+                                    value : "[汗]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7f/sleepya_thumb.gif",
+                                    value : "[困]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6b/sleepa_thumb.gif",
+                                    value : "[睡觉]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/90/money_thumb.gif",
+                                    value : "[钱]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/0c/sw_thumb.gif",
+                                    value : "[失望]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/40/cool_thumb.gif",
+                                    value : "[酷]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/8c/hsa_thumb.gif",
+                                    value : "[花心]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/49/hatea_thumb.gif",
+                                    value : "[哼]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/36/gza_thumb.gif",
+                                    value : "[鼓掌]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d9/dizzya_thumb.gif",
+                                    value : "[晕]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/1a/bs_thumb.gif",
+                                    value : "[悲伤]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/62/crazya_thumb.gif",
+                                    value : "[抓狂]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/91/h_thumb.gif",
+                                    value : "[黑线]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6d/yx_thumb.gif",
+                                    value : "[阴险]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/89/nm_thumb.gif",
+                                    value : "[怒骂]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/40/hearta_thumb.gif",
+                                    value : "[心]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/ea/unheart.gif",
+                                    value : "[伤心]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/58/pig.gif",
+                                    value : "[猪头]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d6/ok_thumb.gif",
+                                    value : "[ok]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d9/ye_thumb.gif",
+                                    value : "[耶]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d8/good_thumb.gif",
+                                    value : "[good]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c7/no_thumb.gif",
+                                    value : "[不要]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d0/z2_thumb.gif",
+                                    value : "[赞]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/40/come_thumb.gif",
+                                    value : "[来]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d8/sad_thumb.gif",
+                                    value : "[弱]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/91/lazu_thumb.gif",
+                                    value : "[蜡烛]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6a/cake.gif",
+                                    value : "[蛋糕]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/d3/clock_thumb.gif",
+                                    value : "[钟]"
+                                }, {
+                                    icon : "http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/1b/m_thumb.gif",
+                                    value : "[话筒]"
+                                }
+                            ]
+                    }
+                }
+                editor.create();
+            });
+        });
+        
+        var dateSelector = new simpleDateSelector($('.simpledateselector')[0]);
+        dateSelector.init('pass');
+    </script>
+</body>
+</html>

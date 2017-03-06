@@ -1,0 +1,71 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?d8syes');
+  src:  url('fonts/icomoon.eot?d8syes#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?d8syes') format('truetype'),
+    url('fonts/icomoon.woff?d8syes') format('woff'),
+    url('fonts/icomoon.svg?d8syes#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-keyboard_arrow_left:before {
+  content: "\e314";
+}
+.icon-keyboard_arrow_right:before {
+  content: "\e315";
+}
+
+.simpledateselector{ position:relative; width:180px; font-size:12px; font-family: 'arial','微软雅黑'; }
+.simpledateselector input{ display:block; width:140px; height:20px; line-height:20px; padding:5px; }
+.dateselector{ 
+    position:absolute; right:-230px; top:0; background:#fff; width:210px; min-height:220px; z-index:10;
+    border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    box-shadow:1px 2px 5px rgba(0,0,0,.1);
+    -webkit-box-shadow:1px 2px 5px rgba(0,0,0,.1);
+    -moz-box-shadow:1px 2px 5px rgba(0,0,0,.1);
+}
+.dateselector_display{ background:rgb(242, 245, 246); height:20px; padding:10px 10px; }
+.display_year,
+.display_month{ display:inline-block; vertical-align:top; }
+.display_year{ width:100px; height:20px; margin-right:10px; }
+.display_month{ width:80px; height:20px; }
+.dateselector_display i{ width:20px; height:20px; background:#f9fafb; display:inline-block; vertical-align:middle; cursor:pointer; color:#c4d0d8; text-align:center; line-height:20px; font-size:16px;
+    border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+}
+.dateselector_display i:hover{ background:#26caff; color:#fff; }
+.dateselector_display span{ color:#2b2f3a; height:20px; line-height:20px; vertical-align:middle; display:inline-block; text-align:center; }
+.display_year span{ width:60px; margin:0; }
+.display_month span{ width:40px; margin:0; }
+
+.dateselector_weeks li{ display:inline-block; width:30px; height:30px; background:#fff; text-align:center; line-height:30px; }
+
+.simpledateselector .weekend{ color:#fd302f;}
+.dateselector_date li{ cursor:pointer; width:30px; height:30px; text-align:center; line-height:30px; position:relative; display:inline-block; }
+.dateselector_date li b{ position:absolute; background:#edf1f3; }
+.dateselector_date li .dateselector_date_r{ top:0; right:0; height:30px; width:1px; }
+.dateselector_date li .dateselector_date_t{ left:0; top:0; width:30px; height:1px; }
+.dateselector_date li.gray,
+.dateselector_date li.gray:hover{ color:#d5d5d8; cursor:default; background:#fff; }
+
+.dateselector_date li:hover,
+body .dateselector_date li.cur{ background:#42d5c2; color:#fff; }

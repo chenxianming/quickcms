@@ -1,0 +1,22 @@
+<script>
+    function dialog(msg){
+        $('<div id="dia"><div class="dia"><i></i><p>'+msg+'</p></div></div>').appendTo('body');
+        $('.dia i').on('click',function(){
+            $('#dia').animate({opacity:0,bottom:-$('#dia').height()},500,function(){
+                $('#dia').remove();
+            });
+        });
+        $('#dia').css({opacity:0,bottom:-$('#dia').height()});
+        $('#dia').animate({opacity:1,bottom:0},500);
+        setTimeout(function(){
+            $('#dia i').trigger('click');
+        },10000);
+    }
+    <% if(err){ %>
+        dialog('<%= err %>');
+    <% } %>
+</script>
+<script>
+    var global = {};
+</script>
+<script src="/admin/<%= assets %>/js/app.js"></script>

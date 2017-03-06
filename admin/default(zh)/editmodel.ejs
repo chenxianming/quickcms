@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include header %>
+<body>
+    <div id="navigator">
+        <div class="logo">
+            <a href="/panel">
+                <em class="nl1"></em>
+                <em class="nl2"></em>
+                <em class="nl3"></em>
+                <i class="material-icons">slow_motion_video</i>
+            </a>
+        </div>
+        <div class="navigator">
+            <ul>
+                <li>
+                    <a href="/panel/system">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>系统</span>
+                    </a>
+                </li>
+                <li class="cur">
+                   <a href="/panel/contents">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>内容</span>
+                   </a>
+                </li>
+                <li>
+                   <a href="/panel/users">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>用户</span>
+                   </a>
+                </li>
+                <li>
+                   <a href="/panel/styles">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>样式</span>
+                   </a>
+                </li>
+                <li>
+                   <a href="/panel/extensions">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>拓展</span>
+                   </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+<% include brand %>
+    
+    <div class="container">
+        <div class="ct">
+            <div class="contents_menu">
+                <div class="contents_title"><a href="/panel/contents/model"><i class="material-icons">insert_drive_file</i><span>模型 - 编辑</span></a></div><ul>
+                    <li><a href="/panel/contents/collections"><i class="material-icons">apps</i><span>列表集</span></a></li><li><a href="/panel/contents/media"><i class="material-icons">video_library</i><span>媒体库</span></a></li><li><a href="/panel/contents/categories"><i class="material-icons">menu</i><span>分类</span></a></li><li><a href="/panel/contents/comments"><i class="material-icons">comment</i><span>留言</span></a></li>
+                </ul>
+            </div>
+            
+            <div style="width:800px;">
+                <div class="infomation fl">
+                    <div class="pd20">
+                        内容模型定义了内容需要的属性<span style="margin-left:5px" class="red">*修改内容模型，已发布内容的自定义属性会被清空，请酌情操作！</span>
+                    </div>
+                </div>
+                <div class="model_edit_actions fr">
+                    <div class="model_edit_actions_export" data-export="<%= infomations.guid %>">导出</div><div data-del="<%= infomations.guid %>" class="model_edit_actions_delete remove_model">删除</div>
+                </div>
+                <div class="clear"></div>
+            </div>
+                
+            <div class="model_new">
+                <div class="model_editor metro">
+                    <dl>
+                        <dt>名称</dt><dd>
+                            <div class="pd15" data-s="name">
+                                <input class="insert" value="<%= infomations.name %>" type="text" /><span class="red">*</span>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                    <dl>
+                        <dt>GUID</dt><dd>
+                            <div class="pd15" data-s="guid">
+                                <input class="insert" disabled="true" value="<%= infomations.guid %>" placeholder="GUID必须为唯一标识" type="text" /><span class="red">*</span>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                    <% infomations.configs.forEach(function(d,i){ %>
+                        <% if(d.type=='form'){ %>
+                    <dl>
+                        <dt>
+                            <div class="options">
+                                <div class="options_t">
+                                    <div class="options_t_w">
+                                        <i class="material-icons">insert_drive_file</i><span>表单</span>
+                                    </div><i class="material-icons">keyboard_arrow_down</i>
+                                </div>
+                                <div class="options_d">
+                                    <ul>
+                                        <li data-type="form">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">insert_drive_file</i><span>表单</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="d-form">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">insert_drive_file</i><span>复表单</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="media">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">photo</i><span>媒体</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="media-l">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">perm_media</i><span>媒体集</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="checkbox">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">radio_button_checked</i><span>单选</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="options">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">check_box</i><span>多选</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="content">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">content_paste</i><span>内容</span>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </dt><dd>
+                            <div class="pd15" data-s="form">
+                                <input class="insert" value="<%= d.name %>" placeholder="名称" type="text" /><div class="form_check" data-type="search"><i class="<%= d.search==1 ? 'sl' : '' %>"><b></b></i><span>搜索</span></div><div class="remove_btn"><i class="material-icons">remove</i></div>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                        <% } %>
+                        
+                        <% if(d.type=='d-form'){ %>
+                    <dl>
+                        <dt>
+                            <div class="options">
+                                <div class="options_t">
+                                    <div class="options_t_w">
+                                        <i class="material-icons">insert_drive_file</i><span>复表单</span>
+                                    </div><i class="material-icons">keyboard_arrow_down</i>
+                                </div>
+                                <div class="options_d">
+                                    <ul>
+                                        <li data-type="form">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">insert_drive_file</i><span>表单</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="d-form">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">insert_drive_file</i><span>复表单</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="media">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">photo</i><span>媒体</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="media-l">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">perm_media</i><span>媒体集</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="checkbox">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">radio_button_checked</i><span>单选</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="options">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">check_box</i><span>多选</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="content">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">content_paste</i><span>内容</span>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </dt><dd>
+                            <div class="pd15" data-s="d-form">
+                                <input class="insert d_value" value="<%= d.name %>" placeholder="名称" type="text" /><input class="insert d_unit" value="<%= d.value %>" placeholder="单位" type="text" /><div class="form_check" data-type="sort"><i class="<%= d.sort==1 ? 'sl' : '' %>"><b></b></i><span>排序</span></div><div class="remove_btn"><i class="material-icons">remove</i></div>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                        <% } %>
+                        
+                        <% if(d.type=='media'){ %>
+                    <dl>
+                        <dt>
+                            <div class="options">
+                                <div class="options_t">
+                                    <div class="options_t_w">
+                                        <i class="material-icons">photo</i><span>媒体</span>
+                                    </div><i class="material-icons">keyboard_arrow_down</i>
+                                </div>
+                                <div class="options_d">
+                                    <ul>
+                                        <li data-type="form">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">insert_drive_file</i><span>表单</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="d-form">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">insert_drive_file</i><span>复表单</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="media">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">photo</i><span>媒体</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="media-l">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">perm_media</i><span>媒体集</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="checkbox">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">radio_button_checked</i><span>单选</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="options">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">check_box</i><span>多选</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="content">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">content_paste</i><span>内容</span>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </dt><dd>
+                            <div class="pd15" data-s="media">
+                                <input class="insert" value="<%= d.name %>" placeholder="名称" type="text" /><div class="remove_btn"><i class="material-icons">remove</i></div>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                        <% } %>
+                        
+                        <% if(d.type=='media-l'){ %>
+                    <dl>
+                        <dt>
+                            <div class="options">
+                                <div class="options_t">
+                                    <div class="options_t_w">
+                                        <i class="material-icons">perm_media</i><span>媒体集</span>
+                                    </div><i class="material-icons">keyboard_arrow_down</i>
+                                </div>
+                                <div class="options_d">
+                                    <ul>
+                                        <li data-type="form">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">insert_drive_file</i><span>表单</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="d-form">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">insert_drive_file</i><span>复表单</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="media">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">photo</i><span>媒体</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="media-l">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">perm_media</i><span>媒体集</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="checkbox">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">radio_button_checked</i><span>单选</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="options">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">check_box</i><span>多选</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="content">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">content_paste</i><span>内容</span>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </dt><dd>
+                            <div class="pd15" data-s="media-l">
+                                <input class="insert" value="<%= d.name %>" placeholder="名称" type="text" /><div class="remove_btn"><i class="material-icons">remove</i></div>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                        <% } %>
+                        
+                        <% if(d.type=='checkbox'){ %>
+                    <dl>
+                        <dt>
+                            <div class="options">
+                                <div class="options_t">
+                                    <div class="options_t_w">
+                                        <i class="material-icons">radio_button_checked</i><span>单选</span>
+                                    </div><i class="material-icons">keyboard_arrow_down</i>
+                                </div>
+                                <div class="options_d">
+                                    <ul>
+                                        <li data-type="form">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">insert_drive_file</i><span>表单</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="d-form">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">insert_drive_file</i><span>复表单</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="media">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">photo</i><span>媒体</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="media-l">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">perm_media</i><span>媒体集</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="checkbox">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">radio_button_checked</i><span>单选</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="options">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">check_box</i><span>多选</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="content">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">content_paste</i><span>内容</span>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </dt><dd>
+                            <div class="pd15" data-s="checkbox">
+                                <div class="checkbox_name">
+                                    <input class="insert" value="<%= d.name %>" placeholder="名称" type="text" /><div class="remove_btn"><i class="material-icons">remove</i></div>
+                                </div>
+                                <% var arr = d.value.split(','); %>
+                                <% arr.forEach(function(o){ %>
+                                    <% if(o){ %>
+                                <div class="checkbox_options">
+                                    <input class="insert" value="<%= o %>" placeholder="选项" type="text"><div class="remove_btn"><i class="material-icons">close</i></div>
+                                </div>
+                                    <% } %>
+                                <% }) %>
+                                <div class="checkbox_options">
+                                    <div class="checkbox_options_add">
+                                        <i class="material-icons">add</i><span>添加选项</span>
+                                    </div>
+                                    <div class="form_check" data-type="filter"><i class="<%= d.filter==1 ? 'sl' : '' %>"><b></b></i><span>筛选</span></div>
+                                </div>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                        <% } %>
+                        
+                        <% if(d.type=='options'){ %>
+                    <dl>
+                        <dt>
+                            <div class="options">
+                                <div class="options_t">
+                                    <div class="options_t_w">
+                                        <i class="material-icons">check_box</i><span>多选</span>
+                                    </div><i class="material-icons">keyboard_arrow_down</i>
+                                </div>
+                                <div class="options_d">
+                                    <ul>
+                                        <li data-type="form">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">insert_drive_file</i><span>表单</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="d-form">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">insert_drive_file</i><span>复表单</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="media">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">photo</i><span>媒体</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="media-l">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">perm_media</i><span>媒体集</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="checkbox">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">radio_button_checked</i><span>单选</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="options">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">check_box</i><span>多选</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="content">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">content_paste</i><span>内容</span>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </dt><dd>
+                            <div class="pd15" data-s="options">
+                                <div class="checkbox_name">
+                                    <input class="insert" value="<%= d.name %>" placeholder="名称" type="text" /><div class="remove_btn"><i class="material-icons">remove</i></div>
+                                </div>
+                                <% var arr = d.value.split(','); %>
+                                <% arr.forEach(function(o){ %>
+                                    <% if(o){ %>
+                                <div class="checkbox_options">
+                                    <input class="insert" value="<%= o %>" placeholder="选项" type="text"><div class="remove_btn"><i class="material-icons">close</i></div>
+                                </div>
+                                    <% } %>
+                                <% }) %>
+                                <div class="checkbox_options">
+                                    <div class="checkbox_options_add">
+                                        <i class="material-icons">add</i><span>添加选项</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                        <% } %>
+                        
+                        <% if(d.type=='content'){ %>
+                    <dl>
+                        <dt>
+                            <div class="options">
+                                <div class="options_t">
+                                    <div class="options_t_w">
+                                        <i class="material-icons">content_paste</i><span>内容</span>
+                                    </div><i class="material-icons">keyboard_arrow_down</i>
+                                </div>
+                                <div class="options_d">
+                                    <ul>
+                                        <li data-type="form">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">insert_drive_file</i><span>表单</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="d-form">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">insert_drive_file</i><span>复表单</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="media">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">photo</i><span>媒体</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="media-l">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">perm_media</i><span>媒体集</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="checkbox">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">radio_button_checked</i><span>单选</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="options">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">check_box</i><span>多选</span>
+                                            </div>
+                                        </li>
+                                        <li data-type="content">
+                                            <div class="options_d_li">
+                                                <i class="material-icons">content_paste</i><span>内容</span>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </dt><dd>
+                            <div class="pd15" data-s="content">
+                                <input class="insert" value="<%= d.name %>" placeholder="名称" type="text" /><div class="remove_btn"><i class="material-icons">remove</i></div>
+                            </div>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                        <% } %>
+                        
+                    <% }) %>
+                    <div class="model_new_f pd20">
+                        <div class="model_new_btn">新增</div>
+                    </div>
+                </div>
+
+                <div class="submit">
+                    <span class="fr updatemodel">保存</span>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <%- include footer %>
+</body>
+</html>

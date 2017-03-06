@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html class="loading">
+    <head>
+        <title><%= title %> - 正在安装QuickCms</title>
+        <link rel='stylesheet' href='<%= assets %>assets/img/style.css' />
+        
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    </head>
+    <body>
+        <div id="scene" data-step="0">
+            <div class="scene"><!-- scene1 -->
+                <div class="container">
+                    <div class="step">
+                        <div class="table">
+                            <div class="cell">
+                                <a target="_blank" href="http://www.quickcms.cn"><img src="<%= assets %>assets/img/logo.png" alt=""></a><span><em class="blue">Setp 1.</em>检查运行环境</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main">
+                        <div class="output" contenteditable="true">
+                            <div class="pd20"></div>
+                        </div>
+                    </div>
+                    <div class="menu">
+                        <div class="fr">
+                            <div class="gray_btn">继续</div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div><div class="scene"><!-- scene2 -->
+                <div class="container">
+                    <div class="step">
+                        <div class="table">
+                            <div class="cell">
+                                <a target="_blank" href="http://www.quickcms.cn"><img src="<%= assets %>assets/img/logo.png" alt=""></a><span><em class="blue">Setp 2.</em>填写数据库配置</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main">
+                        <div class="configs">
+                            <div class="big_input fl"><input type="text" name="sqlhost" placeholder="数据库地址" ></div>
+                            <div class="big_input fl"><input type="text" name="database" placeholder="数据库名称" ></div>
+                            <div class="big_input fl"><input type="text" name="user" placeholder="数据库用户" ></div>
+                            <div class="big_input fl"><input type="password" name="password" placeholder="数据库密码" ></div>
+                            <div class="big_input fl"><input type="text" name="sqlport" placeholder="数据库端口" ></div>
+                            <div class="configs_check fl">
+                                <div id="check_sql" class="green_btn">检查配置</div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="menu">
+                        <div class="fr">
+                            <div class="prev blue_btn gray_btn">后退</div><div class="gray_btn">继续</div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div><div class="scene"><!-- scene3 -->
+                <div class="container">
+                    <div class="step">
+                        <div class="table">
+                            <div class="cell">
+                                <a target="_blank" href="http://www.quickcms.cn"><img src="<%= assets %>assets/img/logo.png" alt=""></a><span><em class="blue">Setp 3.</em>填写用户信息</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main">
+                        <div class="configs">
+                            <div class="big_input fl"><input type="text" name="acount" placeholder="创始人账号" ></div>
+                            <div class="big_input fl"><input type="password" name="pass" placeholder="创始人密码" ></div>
+                            <div class="big_input fl"><input type="text" name="email" placeholder="邮箱" ></div>
+                            <div class="big_input fl"><input type="password" name="passver" placeholder="重复输入密码" ></div>
+                            <div class="big_input fl"><input type="text" name="pre" placeholder="数据表前缀  ( 默认为 qc_ )" ></div>
+                            <div class="configs_check fl">
+                                <div class="green_btn login_account">绑定账号</div>
+                                <span class="warning">绑定至<em class="blue">qCenter</em> (用于分享样式及拓展)</span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="menu">
+                        <div class="fr">
+                            <div class="prev blue_btn gray_btn">后退</div><div class="gray_btn">安装</div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="register">
+                        <div class="register_infomation"></div>
+                        <div class="line"></div>
+                        <div class="register_close"><i class="material-icons">close</i></div>
+                        <div class="register_login">
+                            <div class="register_inner">
+                                <h3>登录已有账号</h3>
+                                <div class="small_input"><input type="text" name="user" placeholder="用户名"></div>
+                                <div class="small_input"><input type="password" name="password" placeholder="密码"></div>
+                                <div class="fr"><div class="small_btn">登录</div></div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="register_register">
+                            <div class="register_inner">
+                                <h3>注册新用户</h3>
+                                <div class="small_input"><input name="username" type="text" placeholder="用户名"></div>
+                                <div class="small_input"><input name="email" type="text" placeholder="邮箱"></div>
+                                <div class="small_input"><input name="password" type="password" placeholder="密码"></div>
+                                <div class="small_input"><input name="passwordVerify" type="password" placeholder="重复密码"></div>
+                                <div class="fr"><div class="small_btn">注册</div></div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><div class="scene"><!-- scene4 -->
+                <div class="container">
+                    <div class="step">
+                        <div class="table">
+                            <div class="cell">
+                                <a target="_blank" href="http://www.quickcms.cn"><img src="<%= assets %>assets/img/logo.png" alt=""></a><span><em class="blue">Complete.</em>正在安装中,请等待...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main">
+                        <div class="output" contenteditable="true">
+                            <div class="pd20"></div>
+                        </div>
+                    </div>
+                    <div class="menu">
+                        <div class="fr">
+                            <div class="gray_btn">完成</div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="register">
+                        <div class="line"></div>
+                        <div class="register_close"><i class="material-icons">close</i></div>
+                        <div class="register_login">
+                            <div class="register_inner">
+                                <h3>登录已有账号</h3>
+                                <div class="small_input"><input type="text" placeholder="用户名"></div>
+                                <div class="small_input"><input type="password" placeholder="密码"></div>
+                                <div class="fr"><div class="small_btn">登录</div></div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="register_register">
+                            <div class="register_inner">
+                                <h3>注册新用户</h3>
+                                <div class="small_input"><input type="text" placeholder="用户名"></div>
+                                <div class="small_input"><input type="text" placeholder="邮箱"></div>
+                                <div class="small_input"><input type="password" placeholder="密码"></div>
+                                <div class="small_input"><input type="password" placeholder="重复密码"></div>
+                                <div class="fr"><div class="small_btn">注册</div></div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script src="/lib/jquery.min.js"></script>
+        <script src="<%= assets %>js/install.js"></script>
+        <script src="<%= assets %>js/bluebird.min.js"></script>
+    </body>
+</html>

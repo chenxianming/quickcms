@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+    <style>
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed, 
+        figure, figcaption, footer, header, hgroup, 
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        
+        #browsers{ width:720px; height:300px; position:absolute; left:50%; top:50%; margin:-150px 0 0 -360px; overflow:hidden; }
+        .slogan_w{ width:289px; position:absolute; left:50%; margin-left:-144.5px; }
+        .slogan img{ width:100%; display:block; }
+        
+        .slogan{ position:relative; display:block; height:150px; }
+        
+        .browsers ul{ display:block; width:999%; }
+        .browsers li a{ display:block; height:150px; width:150px; }
+        .browsers li{ display:block; width:150px; height:150px; position:relative; float:left; margin-right:40px; }
+        .browsers li img{ display:block; width:100%; position:absolute; top:0; left:0; }
+        .browsers li .d2{ display:none; }
+        .browsers li:hover .d2{ display:block; }
+    </style>
+</head>
+    <body>
+        <div id="browsers">
+            <div class="slogan">
+                <div class="slogan_w">
+                    <img src="slogan.png" alt="">
+                </div>
+            </div>
+            <div class="browsers">
+                <ul>
+                    <li><a href="http://chrome.google.com" target="_blank">
+                        <img class="d1" src="./chrome.png" alt="">
+                        <img class="d2" src="./chrome_hover.png" alt="">
+                    </a></li>
+                    <li><a href="http://safari.apple.com" target="_blank">
+                        <img class="d1" src="./safari.png" alt="">
+                        <img class="d2" src="./safari_hover.png" alt="">
+                    </a></li>
+                    <li><a href="http://www.firefox.com" target="_blank">
+                        <img class="d1" src="./firefox.png" alt="">
+                        <img class="d2" src="./firefox_hover.png" alt="">
+                    </a></li>
+                    <li><a href="http://www.opera.com" target="_blank">
+                        <img class="d1" src="./opera.png" alt="">
+                        <img class="d2" src="./opera_hover.png" alt="">
+                    </a></li>
+                    <div style="clear:both"></div>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

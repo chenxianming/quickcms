@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include header %>
+<body>
+    <div id="navigator">
+        <div class="logo">
+            <a href="/panel">
+                <em class="nl1"></em>
+                <em class="nl2"></em>
+                <em class="nl3"></em>
+                <i class="material-icons">slow_motion_video</i>
+            </a>
+        </div>
+        <div class="navigator">
+            <ul>
+                <li>
+                    <a href="/panel/system">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>系统</span>
+                    </a>
+                </li>
+                <li>
+                   <a href="/panel/contents">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>内容</span>
+                   </a>
+                </li>
+                <li>
+                   <a href="/panel/users">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>用户</span>
+                   </a>
+                </li>
+                <li>
+                   <a href="/panel/styles">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>样式</span>
+                   </a>
+                </li>
+                <li class="cur">
+                   <a href="/panel/extensions">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>拓展</span>
+                   </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+<% include brand %>
+    
+    <div class="container">
+        <div class="ct">
+            <div class="contents_menu">
+                <div class="contents_title"><a href="/panel/extensions"><i class="material-icons">extension</i><span>拓展</span></a></div><ul>
+                    <li><a href="/panel/extensions/center"><i class="material-icons">camera</i><span>拓展中心</span></a></li>
+                </ul>
+            </div>
+            
+            <div class="infomation">
+                <div class="pd20">
+                    拓展是QuickCms额外的功能，你可通过拓展中心不停地获取新功能
+                </div>
+            </div>
+            
+            <div class="extensions">
+                <ul>
+                    <% infomations.extensions.forEach(function(d){ %>
+                    <li class="item">
+                        <div class="item_infomation">
+                            <div class="pd20">
+                                <h3><i class="material-icons"><%= d.icon || '' %></i><span><%= d.name %></span></h3>
+                                <h4><span>Ver:</span><span class="green"><%= d.versions %></span></h4>
+                                <p><%= d.postsubject %></p>
+                            </div>
+                            <div class="item_view"><a href="/panel/extensions/view?guid=<%= d.guid %>">详情</a></div>
+                        </div>
+                        <div class="item_action">
+                            <div class="pd20">
+                                <%
+                                    var status = d.status=='normal' ? true : false;
+                                %>
+                                <a<%= status ? ' class=running' : '' %> href="/panel/extensions/set?guid=<%= d.guid %>&status=<%= status ? '0' : '1' %>"><i class="material-icons"><%= status ? 'check_box' : 'check_box_outline_blank' %></i><span>运行中</span></a>
+                                <a class="rm_extensions" data-guid="<%= d.guid %>" href="#"><i class="material-icons">delete</i><span>删除</span></a>
+                            </div>
+                        </div>
+                    </li>
+                    <% }); %>
+                    
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="pages">
+                <ul></ul>
+            </div>
+            
+        </div>
+    </div>
+    
+    <%- include footer %>
+    <script>
+        var lists = [];
+        var query = <%- JSON.stringify(infomations.query) %>
+        
+        function getStr(query,idx){
+            var str = '';
+            var o = {
+                page:idx
+            };
+
+            for(var key in query){
+                if(key!='page'){
+                    o[key] = query[key];
+                }
+            }
+            var idx = 0;
+            for(var key in o){
+                str += (idx==0 ? `?${key}=${o[key]}` : `&${key}=${o[key]}`);
+                idx++;
+            }
+            
+            return str;
+        }
+        
+        function displayPage(nowPage,count){
+            
+            var display = 5;
+            nowPage = nowPage < 1 ? 1 : nowPage;
+            nowPage = nowPage > count ? count : nowPage;
+            count = count < nowPage ? nowPage : count;
+            var start = nowPage - Math.floor(display/2);
+            start = start < 1 ? 1 : start;
+            var end = nowPage + Math.floor(display/2);
+            end = end > count ? count : end;
+
+            var currentNum = end - start +1;
+
+            if(currentNum<display && start >1){
+                start = start - (display - currentNum);
+                start = start < 1 ? 1: start;
+                currentNum = end - start + 1;
+            }
+
+            if(currentNum < display && end < count){
+                end = end + (display - currentNum);
+                end = end > count ? count : end;
+            }
+
+            if(nowPage>1){
+                var str = getStr(query,nowPage-1);
+                
+                lists.push(`<li><a href="/panel/extensions${str}"><i class="material-icons">navigate_before</i></a></li>`);
+            }
+            
+            for(var i = start;i<end;i++){
+                var str = getStr(query,i);
+                
+                if(i==nowPage){
+                    lists.push(`<li class="current"><a href="/panel/extensions${str}">${i}</a></li>`);
+                }else{
+                    lists.push(`<li><a href="/panel/extensions${str}">${i}</a></li>`);
+                }
+            }
+
+            if(pages - nowPage > 1){
+                var str = getStr(query,pages);
+                
+                lists.push('<li><span>...</span></li>');
+                lists.push(`<li><a href="/panel/extensions${str}">${pages}</a></li>`);
+            }
+            
+            if(nowPage < end && nowPage!=pages){
+                var str = getStr(query,nowPage+1);
+                
+                lists.push(`<li><a href="/panel/extensions${str}"><i class="material-icons">navigate_next</i></a></li>`);
+            }
+            
+            return lists;
+        }
+        
+        var nowPage = <%- infomations['nowPage'] %>;
+        var pages = <%- infomations.pageContainer.length %>;
+        var pageContainer = <%- JSON.stringify(infomations.pageContainer) %>;
+        
+        var listDiv = displayPage(nowPage,pages+1);
+        
+        listDiv.forEach(function(p,i){
+            $('.pages ul').append(p);
+        });
+    </script>
+</body>
+</html>

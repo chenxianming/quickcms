@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %> - <%= system.sitename %></title>
+        <link rel='stylesheet' href='<%= path %>assets/img/style.css' />
+        
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-touch-fullscreen" content="yes">
+		<meta name="keywords" content="<%= system.keywords %>" />
+		<meta name="description" content="<%= system.description %>" />
+
+        <link rel="apple-touch-icon" sizes="76x76" href="<%= system.icon %>">
+        <link rel="apple-touch-icon" sizes="120x120" href="<%= system.icon %>">
+        <link rel="apple-touch-icon" sizes="152x152" href="<%= system.icon %>">
+        <link rel="apple-touch-icon" sizes="180x180" href="<%= system.icon %>">
+
+        <link rel="icon" sizes="192x192" href="<%= system.icon %>">
+        <link rel="icon" sizes="128x128" href="<%= system.icon %>">
+        
+    </head>
+    <body>
+        <!-- index.ejs为默认文件入口,用于加载真实页面数据,伪路由 -->
+        <%- include header %>
+        <div id="lists">
+            <div class="wrap">
+                <ul><% infomations.contents.forEach(function(d,i){ %><% 
+                        var url = '',
+                            chunk = '',
+                            article = d.router ? d.router : (d.model+'-'+d.id);
+                        
+                        position.forEach(function(o){
+                            chunk += '/'+o.router;
+                        });
+                        
+                        url = chunk+'/'+article;
+                    %><li class="item">
+                        <a href="<%= url %>">
+                            <img src="<%= d['field_4'] %>" alt="<%= d['field_1'] %>" />
+                            <div class="item-infomation">
+                                <div class="table">
+                                    <div class="cell">
+                                        <h2><%= d['title'] %></h2>
+                                        <h3><%= d['field_1'] %></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li><% }); %>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="preload">
+            <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve"><path fill="#7e7e7e" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z" transform="rotate(184.966 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg>
+        </div>
+        
+        <script src="/lib/jquery.min.js"></script>
+        <script>
+            var global = {};
+        </script>
+        <script src="<%= path %>js/app.js"></script>
+    </body>
+</html>

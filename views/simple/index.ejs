@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %> - <%= system.sitename %></title>
+        <link rel='stylesheet' href='<%= path %>assets/img/style.css' />
+        
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-touch-fullscreen" content="yes">
+		<meta name="keywords" content="<%= system.keywords %>" />
+		<meta name="description" content="<%= system.description %>" />
+
+        <link rel="apple-touch-icon" sizes="76x76" href="<%= system.icon %>">
+        <link rel="apple-touch-icon" sizes="120x120" href="<%= system.icon %>">
+        <link rel="apple-touch-icon" sizes="152x152" href="<%= system.icon %>">
+        <link rel="apple-touch-icon" sizes="180x180" href="<%= system.icon %>">
+
+        <link rel="icon" sizes="192x192" href="<%= system.icon %>">
+        <link rel="icon" sizes="128x128" href="<%= system.icon %>">
+        
+    </head>
+    <body>
+        <!-- index.ejs为默认文件入口,用于加载真实页面数据,伪路由 -->
+        <div id="container">
+            <div id="index">
+                
+<%- include header %>
+                <div id="main" class="open"></div>
+                
+            </div>
+            
+        </div>
+        
+        <script src="/lib/jquery.min.js"></script>
+        <script src="/lib/tween.verdor.js"></script>
+        <script src="/lib/parallax.js"></script>
+        <script>
+            var global = {};
+        </script>
+        <script src="<%= path %>js/app.js"></script>
+    </body>
+</html>

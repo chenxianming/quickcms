@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include header %>
+<body>
+    <div id="navigator">
+        <div class="logo">
+            <a href="/panel">
+                <em class="nl1"></em>
+                <em class="nl2"></em>
+                <em class="nl3"></em>
+                <i class="material-icons">slow_motion_video</i>
+            </a>
+        </div>
+        <div class="navigator">
+            <ul>
+                <li class="cur">
+                    <a href="/panel/system">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>系统</span>
+                    </a>
+                </li>
+                <li>
+                   <a href="/panel/contents">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>内容</span>
+                   </a>
+                </li>
+                <li>
+                   <a href="/panel/users">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>用户</span>
+                   </a>
+                </li>
+                <li>
+                   <a href="/panel/styles">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>样式</span>
+                   </a>
+                </li>
+                <li>
+                   <a href="/panel/extensions">
+                        <em class="nl1"></em>
+                        <em class="nl2"></em>
+                        <em class="nl3"></em>
+                        <i></i>
+                        <span>拓展</span>
+                   </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+<% include brand %>
+    
+    <div class="container">
+        <div class="ct">
+           <form action="/panel/system" method="post">
+            <div class="system_block metro">
+                <div class="pd20">
+                    <h4 class="blue">网站名称</h4>
+                    <div class="login_text">
+                        <div class="description">填写网站名称</div>
+                        <div class="variable">变量: {system.sitename}</div>
+                        <input class="insert" name="sitename" type="text" value="<%= infomations.datas['sitename'] || "" %>" />
+                    </div>
+                </div>
+            </div>
+            
+            <% 
+                if(infomations['nginx']){
+                    %>
+            <div class="system_block metro">
+                <div class="pd20">
+                    <h4 class="blue">绑定域名(多个域名用","隔开)</h4>
+                    <div class="login_text">
+                        <div class="description">
+                        <% if(infomations.address){ %>
+                            将A记录解析至<em class="blue"><%= infomations.address || '未能获取ip地址,请检查网络' %></em>
+                        <% }else{ %>
+                            未能获取ip地址,请检查网络
+                        <% } %>
+                        </div>
+                        <div class="variable">变量: {system.domain}</div>
+                        <input class="insert" name="domain" type="text" value="<%= infomations.datas['domain'] || "" %>" />
+                    </div>
+                </div>
+            </div>      
+                    <%
+                }
+            %>
+            
+            <div class="system_block metro">
+                <div class="pd20">
+                    <h4 class="blue">网站端口</h4>
+                    <div class="login_text">
+                        <div class="description">
+                        网站运行的端口,请勿随意更改
+                        </div>
+                        <div class="variable">变量: {system.port}</div>
+                        <input class="insert" name="port" type="text" value="<%= infomations.datas['port'] || "" %>" />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="system_block metro">
+                <div class="pd20">
+                    <h4 class="blue">关键字</h4>
+                    <div class="login_text">
+                        <div class="description">填写网站关键字</div>
+                        <div class="variable">变量: {system.keywords}</div>
+                        <input class="insert" name="keywords" type="text" value="<%= infomations.datas['keywords'] || "" %>" />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="system_block metro">
+                <div class="pd20">
+                    <h4 class="blue">描述</h4>
+                    <div class="login_text">
+                        <div class="description">填写网站描述</div>
+                        <div class="variable">变量: {system.description}</div>
+                        <div class="insert">
+                            <textarea name="description"><%= infomations.datas['description'] || "" %></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="system_block metro">
+                <div class="pd20">
+                    <h4 class="blue">ICON</h4>
+                    <div class="login_text">
+                        <div class="description">设置网站ICON</div>
+                        <div class="variable">变量: {system.keywords}</div>
+                        
+                        <div class="media_input big">
+                            <input class="insert" name="icon" type="text" placeholder="从媒体库中选择图片作为ICON" value="<%= infomations.datas['icon'] || "" %>" />
+                            <div class="media_input_btn"><i class="material-icons">subscriptions</i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="system_block metro">
+                <div class="pd20">
+                    <h4 class="blue">评论</h4>
+                    <div class="login_text">
+                        <div class="description">同一用户在规定时间内不能发表第二次评论 (单位:<span class="blue">分钟</span>)</div>
+                        <div class="variable"></div>
+                        
+                        <input class="insert" name="comment" type="text" value="<%= infomations.datas['comment'] %>">
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="system_block metro">
+                <div class="pd20">
+                    <h4 class="blue">默认样式</h4>
+                    <div class="login_text">
+                        <div class="description" style="top:60px;">网站默认使用样式</div>
+                        <div class="variable" style="top:60px;">变量: {system.style}</div>
+                        
+                        <div class="menu_selected" data-bind='input[name="style"]'>
+                            <dl class="ct_group">
+                                <% 
+                                    var curStyle = {};
+                                    
+                                    if(!infomations.datas.style){
+                                        curStyle = infomations.styles[0]; 
+                                    }else{
+                                        infomations.styles.forEach(function(d){
+                                            if(d && (d.configs.guid==infomations.datas.style)){
+                                                curStyle = d;
+                                            }
+                                        }); 
+                                    }
+                                
+                                    if(!curStyle) curStyle = infomations.styles[0] || {}; 
+                                %>
+                                <input name="style" value="<%= curStyle.configs && curStyle.configs.guid %>" style="display:none;" />
+                                <dt data-value="<%= curStyle.configs && curStyle.configs.guid || '' %>"><span><%= curStyle.configs && curStyle.configs.name %></span><i class="material-icons">keyboard_arrow_down</i></dt>
+                                <dd>
+                                    <ul>
+                                    <% infomations.styles.forEach(function(d){ %>
+                                        <li data-value="<%= d.configs.guid %>"><%= d.configs.name %></li>
+                                    <% }) %>
+                                    </ul>
+                                </dd>
+                            </dl>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="configs_submit">
+                <input class="fr" type="submit" value="保存" />
+                <div class="clear"></div>
+            </div>
+            </form>
+        </div>
+    </div>
+    
+    <%- include footer %>
+</body>
+</html>

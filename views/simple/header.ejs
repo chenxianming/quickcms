@@ -1,0 +1,122 @@
+        <div id="header">
+            <div class="wrap">
+                <div class="fl logo"><a href="/"><img src='<%= path %>assets/img/logo.png' /></a></div>
+                <div class="fr navigator">
+                    <div class="table">
+                        <ul class="cell">
+                            <% infomations.categories.datas.forEach(function(d,i){ %>
+                                <% var current = position[0] && ( d.router == position[0].router ? true : false ) %>
+                                
+                                <li<%= current ? ' class=current' : '' %>>
+                                    <a href="/<%= d.router %>"><%= d.name %></a>
+                                </li>
+                            <% }) %>
+                                <li class="menu"><i class="material-icons">menu</i></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+            </div>
+            <%
+                    //获取当前位置链接
+                    var nowLink = '/';
+                    position.forEach(function(d){
+                        nowLink += d.router+'/';
+                    });
+
+                    //获取当前位置上级目录链接
+                    var parentsLink = '/';
+                    position.forEach(function(d,i){
+                        if(i < position.length-1) parentsLink += d.router+'/';
+                    });
+            %>
+            
+            <% 
+                var commonModel = '',
+                    temp1 = true;
+                if(infomations.contents.length){
+                    for(var i = 0;i<infomations.contents.length;i++){
+                        var d = infomations.contents[i];
+                        if(!commonModel){
+                            commonModel = d.model;
+                        }
+                        if(commonModel&&commonModel!=d.model){
+                            temp1 = false;
+                            break ;
+                        }
+                    }
+                    
+                    if(temp1){
+                        var modelconfigs = infomations.modelconfigs[commonModel];
+                    }
+                }
+                
+            %>
+            <div id="header_menu">
+                <div class="wrap">
+                    <div class="fl">
+                        <div class="filter">
+                        <% 
+                            //显示筛选
+                            if(modelconfigs){
+                                modelconfigs.forEach(function(d){
+                                    if(d.filter==1){
+                                        var arr = d.value.split(',');
+                        %>
+                        
+                            <dl data-id="<%= d.id %>">
+                                <dt><span><%= d.name %></span></dt>
+                                <dd><i data-idx="0"><b></b></i><span>全部</span></dd>
+                                <% arr.forEach(function(o,idx){
+                                    if(o){
+                                %>
+                                     <dd><i data-idx="<%= idx+1 %>"><b></b></i><span><%= o %></span></dd>   
+                                <%
+                                    }
+                                }) %>
+                                
+                            </dl>
+                        
+                        <%
+                                    }
+                                });
+                            }
+                        %>
+                        </div>
+                        <div class="sort">
+                            <div class="sort_li" data-sort="postdate">
+                                <i class="material-icons">access_time</i><span>时间</span><em><i class="material-icons">keyboard_arrow_down</i></em>
+                            </div><div class="sort_li" data-sort="up">
+                                <i class="material-icons">thumb_up</i><span>推荐度</span><em><i class="material-icons">keyboard_arrow_down</i></em>
+                            </div>
+                            <% 
+                                //显示排序
+                                if(modelconfigs){
+                                    modelconfigs.forEach(function(d){
+                                        if(d.sort==1){
+                                        %>
+                                        <div class="sort_li" data-sort="fd<%= d.id %>">
+                                <i class="material-icons"></i><span><%= d.name %></span><em><i class="material-icons">keyboard_arrow_down</i></em>
+                            </div>
+                                        <%
+                                        }
+                                    });
+                                }
+                            %>
+                        </div>
+                    </div>
+                    <div class="search fr">
+                        <input type="text" placeholder="输入关键字" /><span><i class="material-icons">search</i></span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <script>
+            try{
+                document.createElement('canvas').getContext('2d')
+            }catch(e){
+                location.href = '/browsernotsupport';
+            }
+        </script>

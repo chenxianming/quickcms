@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %> - <%= system.sitename %></title>
+        <link rel='stylesheet' href='<%= path %>assets/img/style.css' />
+        
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-touch-fullscreen" content="yes">
+		<meta name="keywords" content="<%= system.keywords %>" />
+		<meta name="description" content="<%= system.description %>" />
+
+        <link rel="apple-touch-icon" sizes="76x76" href="<%= system.icon %>">
+        <link rel="apple-touch-icon" sizes="120x120" href="<%= system.icon %>">
+        <link rel="apple-touch-icon" sizes="152x152" href="<%= system.icon %>">
+        <link rel="apple-touch-icon" sizes="180x180" href="<%= system.icon %>">
+
+        <link rel="icon" sizes="192x192" href="<%= system.icon %>">
+        <link rel="icon" sizes="128x128" href="<%= system.icon %>">
+        
+    </head>
+    <body>
+        <div id="container">
+            <%- include header %>
+            
+            <div id="main">
+                <div id="works">
+                    <% 
+                        //读取模型配置
+                        var modelconfigs = infomations.modelconfigs[infomations.contents.model];
+
+                        //获取当前位置链接
+                        var nowLink = '/';
+                        position.forEach(function(d){
+                            nowLink += d.router+'/';
+                        });
+
+                        //获取当前位置上级目录链接
+                        var parentsLink = '/';
+                        position.forEach(function(d,i){
+                            if(i < position.length-1) parentsLink += d.router+'/';
+                        });
+                    %>
+
+                    <div class="works_infomation">
+                        <div class="works_infomation_wrap">
+                            <div class="wrap">
+                                <div class="works_infomation_1">
+                                    <div class="fl">
+                                        <h3><%= infomations.contents.title %></h3>
+                                        <h4><%= infomations.contents['field_1'] %></h4>
+                                    </div>
+                                    <div class="visit_site fr">
+                                        <a href="<%= infomations.contents['field_2'] ? infomations.contents['field_2'] : '#' %>" target="<%= infomations.contents['field_2'] ? '_blank' : '_self' %>">
+                                            <div class="visit_site_na">
+                                                <i class="material-icons">desktop_mac</i><span>Launch</span>
+                                            </div>
+                                            <div class="visit_site_ia">
+                                                <i class="material-icons">desktop_mac</i><span>Launch</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="works_infomation_2">
+                                    <ul>
+                                        <%
+                                            //获取选项名称以及值
+                                            //在works模型中对应的'风格'索引为2
+                                            //在风格中心获取的模板都有其对应的模型导入文件
+
+                                            var arrIndex = 2;
+                                            var arr = modelconfigs[arrIndex].value.split(','),
+                                                index = infomations.contents['field_'+modelconfigs[2].id];
+
+                                            var str;
+                                            for(var i=0;i<arr.length;i++){
+                                                if(arr[i]){
+                                                    str = arr[i];
+                                                    break;
+                                                }
+                                            }
+                                        %>
+
+                                        <li><%= modelconfigs[arrIndex].name %>:<%= str %></li>
+                                        <li>时间:<%= infomations.contents.postdate || '' %></li>
+                                        <%
+                                            var tags = infomations.contents.tags.split(','),
+                                                tagChunk = '';
+
+                                        %>
+                                        <li>
+                                            关键字:
+                                            <% tags.forEach(function(d){ %>
+                                                <a href="<%= parentsLink +'?keywords='+d %>"><%= d %></a>
+                                            <% }) %>
+                                        </li>
+                                        <li>查看次数:<%= infomations.contents.views %></li>
+                                        <li class="view_comment" data-model="<%= infomations.contents.model %>" data-id="<%= infomations.contents.id %>"><i class="material-icons">comment</i><span>评论(0)</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="works_content ele-parallax" data-fric=".3">
+                        <div class="wrap">
+                            <div class="works_content_switch el-fixed">
+                                <% 
+                                    //获取同一分类下相邻内容
+                                    var lists = infomations.lists,
+                                        nowIndex = infomations.index;
+
+                                %>
+
+                                <% if(lists[nowIndex-1]){ %>
+                                <% var prevLink = lists[nowIndex-1].router ? lists[nowIndex-1].router : lists[nowIndex-1].model+'-'+lists[nowIndex-1].id %>
+                                <div class="works_content_switch_prev">
+                                    <a href="<%= parentsLink+prevLink %>">
+                                        <h2><%= (nowIndex-1) < 9 ? '0'+(nowIndex) : (nowIndex) %></h2>
+                                        <h3><i><b class="i1"></b><b class="i2"></b></i><span>Prev</span></h3>
+                                    </a>
+                                </div>
+                                <% } %>
+                                <% if(lists[nowIndex+1]){ %>
+                                <% var nextLink = lists[nowIndex+1].router ? lists[nowIndex+1].router : lists[nowIndex+1].model+'-'+lists[nowIndex+1].id %>
+                                <div class="works_content_switch_next">
+                                    <a href="<%= parentsLink+nextLink %>">
+                                        <h2><%= (nowIndex+1) < 9 ? '0'+(nowIndex+2) : (nowIndex+2) %></h2>
+                                        <h3><i><b class="i1"></b><b class="i2"></b></i><span>Next</span></h3>
+                                    </a>
+                                </div>
+                                <% } %>
+                            </div>
+
+                            <% 
+                                //获取内容图
+                                //在该内容模型中,id5为多图内容
+                                var contentIndex = 5,
+                                    contents = [];
+
+                                if(infomations.contents['field_'+contentIndex]){
+                                    contents = infomations.contents['field_'+contentIndex].split(',');
+                                }
+
+                            %>
+                            <% contents.forEach(function(d){ %>
+                                <div class="works_content_img float"  data-fric="<%= Math.random() %>"><img src="<%= d %>" alt=""></div>
+                            <% }) %>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+        <script src="/lib/jquery.min.js"></script>
+        <script src="/lib/tween.verdor.js"></script>
+        <script src="/lib/parallax.js"></script>
+        <script>
+            var global = {};
+        </script>
+        <script src="<%= path %>js/app.js"></script>
+    </body>
+</html>

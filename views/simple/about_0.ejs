@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %> - <%= system.sitename %></title>
+        <link rel='stylesheet' href='<%= path %>assets/img/style.css' />
+        
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-touch-fullscreen" content="yes">
+		<meta name="keywords" content="<%= system.keywords %>" />
+		<meta name="description" content="<%= system.description %>" />
+
+        <link rel="apple-touch-icon" sizes="76x76" href="<%= system.icon %>">
+        <link rel="apple-touch-icon" sizes="120x120" href="<%= system.icon %>">
+        <link rel="apple-touch-icon" sizes="152x152" href="<%= system.icon %>">
+        <link rel="apple-touch-icon" sizes="180x180" href="<%= system.icon %>">
+
+        <link rel="icon" sizes="192x192" href="<%= system.icon %>">
+        <link rel="icon" sizes="128x128" href="<%= system.icon %>">
+        
+    </head>
+    <body>
+        <div id="container">
+            <%- include header %>
+            <div id="main">
+                <div id="about" class="ele-parallax" data-fric="<%= Math.random() %>">
+                    <div class="wrap" style="position:relative;">
+                    <%
+                        //该页直接从页表取数据
+                        //id为1
+                        var datas = infomations.contents[0];
+
+                        var positionArr = [
+                            {left:0,top:65},
+                            {left:300,top:230},
+                            {left:410,top:0},
+                            {left:345,top:360},
+                            {left:140,top:530},
+                            {left:480,top:730},
+                        ];
+                        var imgArr = datas['field_2'].split(',');
+
+                        var f = (imgArr.length-positionArr.length);
+                        if(f>0){
+                            for(var i = 0;i<f;i++){
+                                positionArr.push({
+                                    top:positionArr[positionArr.length-1].top+100+500*Math.random(),
+                                    left:100+500*Math.random()
+                                });
+                            }
+                        }
+                    %>
+                    <% 
+                        imgArr.forEach(function(d,i){
+                            var style = positionArr[i],
+                                styleStr = 'position:absolute;';
+
+                            for(var key in style){
+                                styleStr += (`${key}:${style[key]}px;z-index:${20-i};`);
+                            }
+
+                            %>
+                            <div class="float" data-fric="<%= Math.random() %>" style="<%= styleStr %>">
+                                <img src="<%= d %>" />
+                            </div>
+                            <%
+                        });
+                    %>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <script src="/lib/jquery.min.js"></script>
+        <script src="/lib/tween.verdor.js"></script>
+        <script src="/lib/parallax.js"></script>
+        <script>
+            var global = {};
+        </script>
+        <script src="<%= path %>js/app.js"></script>
+    </body>
+</html>
