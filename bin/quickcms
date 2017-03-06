@@ -66,10 +66,20 @@ if(program.init){
         
     } ) ).then( () => new Promise( (resolve,reject) => {
         var logs = ['error.log','logfile.log','output.log'],
-            tempPath = __dirname.replace('bin','temp');
+            tempPath = __dirname.replace('bin','temp'),
+            extensionsPath = __dirname.replace('bin','extensions'),
+            avatarPath = __dirname.replace('bin','public/upload/avatar');
         
         if(!fs.existsSync(tempPath)){
             fs.mkdirSync(tempPath);
+        }
+        
+        if(!fs.existsSync(extensionsPath)){
+            fs.mkdirSync(extensionsPath);
+        }
+        
+        if(!fs.existsSync(extensionsPath)){
+            fs.mkdirSync(avatarPath);
         }
         
         logs.forEach(function(d){
