@@ -78,7 +78,7 @@ if(program.init){
             fs.mkdirSync(extensionsPath);
         }
         
-        if(!fs.existsSync(extensionsPath)){
+        if(!fs.existsSync(avatarPath)){
             fs.mkdirSync(avatarPath);
         }
         
