@@ -138,7 +138,7 @@ module.exports = {
                         return ;
                     }
                     
-                    gloabal.restartTask = execSync(`forever restart ${__dirname.replace('routes','bin/www')}`);
+                    global.restartTask = execSync(`forever restart ${__dirname.replace('routes','bin/www')}`);
                     
                     setTimeout(function(){
                         gloabal.restart.task = null;
