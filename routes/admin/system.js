@@ -134,14 +134,14 @@ module.exports = {
             updateconfigs({port:obj.port});
             setTimeout(function(){
                 try{
-                    if(global.restart.task){
+                    if(global.restartTask){
                         return ;
                     }
                     
                     global.restartTask = execSync(`forever restart ${__dirname.replace('routes','bin/www')}`);
                     
                     setTimeout(function(){
-                        gloabal.restart.task = null;
+                        gloabal.restartTask = null;
                     },2000);
                     
                 }catch(e){

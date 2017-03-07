@@ -86,10 +86,10 @@ module.exports = {
                         return ;
                     }
                     
-                    gloabal.restart.task = execSync(`forever restart ${www}`);
+                    gloabal.restartTask = execSync(`forever restart ${www}`);
                     
                     setTimeout(function(){
-                        gloabal.restart.task = null;
+                        gloabal.restartTask = null;
                     },2000);
                 }catch(e){
                     console.log('重启forever失败');
