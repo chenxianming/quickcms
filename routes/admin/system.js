@@ -134,7 +134,7 @@ module.exports = {
             updateconfigs({port:obj.port});
             setTimeout(function(){
                 try{
-                    if(gloabal.restart.task){
+                    if(global.restart.task){
                         return ;
                     }
                     

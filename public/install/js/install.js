@@ -169,7 +169,7 @@ asyncArr.prototype = {
                             `);
 
                             (!data.msg) && arr.push(true);
-                            c('.scene:eq(3)').find('.output')[0].scrollTop = c('.scene:eq(3)').find('.output')[0].scrollHeight-10;
+                            c('.scene:eq(3)').find('.output')[0].scrollTop = c('.scene:eq(3)').find('.output')[0].scrollHeight+10;
                             rev1();
                         });
                     },index*100);
