@@ -1,5 +1,5 @@
 //panel auto tasks
-var configs = require(`${__dirname.replace('utils','')}/configs`);
+var configs = require(`${__dirname.replace('utils','')}configs`);
 var connect = require(`${__dirname}/connect`);
 var c = require(`${__dirname}/request`);
 var asyncArr = require('async-arr');

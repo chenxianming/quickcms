@@ -94,5 +94,5 @@ module.exports = {
 }
 `;
     
-    fs.writeFileSync(`${__dirname.replace('utils','')}/configs.js`,str);
+    fs.writeFileSync(`${__dirname.replace('utils','')}configs.js`,str);
 }

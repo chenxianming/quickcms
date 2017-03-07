@@ -1,4 +1,4 @@
-var configs = require(`${__dirname.replace('utils','')}/configs`);
+var configs = require(`${__dirname.replace('utils','')}configs`);
 var connect = require(`${__dirname}/connect`);
 var routerArr = require(`${__dirname}/routerarr`);
 var routerStr = require(`${__dirname}/routerstr`);

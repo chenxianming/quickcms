@@ -19,7 +19,7 @@ module.exports = function(){
     
     ( () => new Promise( (resolve,reject) => {
         
-        fs.readFile(`${__dirname.replace('utils','')}/configs.js`,'utf-8',function(err,cfa){
+        fs.readFile(`${__dirname.replace('utils','')}configs.js`,'utf-8',function(err,cfa){
             if(err){
                 return res.json({
                     msg:step
@@ -1722,7 +1722,7 @@ module.exports = function(){
         
         var chunk2 = `
 module.exports = function(router){
-    var configs = require('${__dirname.replace('utils','')}/configs');
+    var configs = require('${__dirname.replace('utils','')}configs');
     var connect = require('${__dirname}/connect');
     var asyncArr = require('async-arr');
     var articlevisit = require('${__dirname}/articlevisit');
