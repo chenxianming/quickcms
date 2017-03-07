@@ -456,6 +456,7 @@
                     
                     var self = c(this);
                     
+                    /*
                     ( () => new Promise( (resolve,reject) => {
                         c.post('/api/new-reply',{
                             id:id,
@@ -503,6 +504,58 @@
                             });
                         
                     } ) )
+                    */
+                    
+                    (function(){
+                        return new Promise(function(resolve,reject){
+                            c.post('/api/new-reply',{
+                                id:id,
+                                model:model,
+                                title:title,
+                                author:author,
+                                email:email,
+                                tel:tel,
+                                content:content
+                            },function(data){
+                                if(data.msg){
+                                    return c('.commentreply_respone').html(data.msg);
+                                }
+                                resolve();
+                            });
+                        })
+                    })().then(function(){
+                        return new Promise(function(resolve,reject){
+                            c('.commentreply_respone').html('评论成功');
+                            c('.onecomment').remove();
+
+                            c.get('/jsonp/getcomments',{
+                                id:id,
+                                model:model,
+                                count:5,
+                                page:1
+                            },function(data){
+                                var chunk = '';
+                                self.parents('#commentpage').attr('data-page','1');
+                                c('.commentpage .pd20').eq(0).html(`<div class="oncommentpage">
+                                <span class="na oncommentpage_prev">上页</span><span class="oncommentpage_next">下页</span>
+                            </div>`);
+                                data.datas.datas.forEach(function(d){
+                                    c('.oncommentpage').before(`
+                                        <div class="onecomment">
+                                            <h2>#${d.index} ${d.title} (${parseDate(new Date(d.date))})</h2>
+                                            <h3>
+                                                <span><i class="material-icons">person</i>Author:${d.author}</span>
+                                                <span><i class="material-icons">email</i>Email:${d.email}</span>
+                                                <span><i class="material-icons">phone_android</i>Tel:${d.tel}</span>
+                                            </h3>
+                                            <p>${d.content}</p>
+                                        </div>
+                                    `);
+                                });
+
+                            });
+                        })
+                    });
                     
                 });
                 

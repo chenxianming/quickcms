@@ -463,7 +463,8 @@
                 `);
 
                 var datas = [];
-
+                
+                /*
                 ( () => new Promise( (resolve,reject)=>{
                     setTimeout(resolve,100);
                 } ) )().then( () => new Promise( (resolve,reject)=>{
@@ -503,6 +504,55 @@
                         `);
                     });
                 } ) );
+                */
+                
+                (function(){
+                    return new Promise(function(resolve,reject){
+                        setTimeout(resolve,100);
+                    })
+                })().then(function(){
+                    return new Promise(function(resolve,reject){
+                        c('.media_selector').addClass('open');
+                        c.post('/panel/contents/media',function(data){
+                            datas = data.result;
+                            resolve();
+                        });
+                    })
+                }).then(function(){
+                    return new Promise(function(resolve,reject){
+                        c('.media_selector_preload').animate({opacity:0},resolve);
+                    })
+                }).then(function(){
+                    return new Promise(function(resolve,reject){
+                        c('.media_selector_preload').remove();
+                        c('.media_selector').prepend(`<div class="play_container"><div class="pd20"></div></div>`);
+
+                        datas.forEach(function(d){
+                            var str = '';
+                            if(d.type.indexOf('video')>-1){
+                                str = 'slideshow';
+                            }
+                            if(d.type.indexOf('image')>-1){
+                                str = 'photo';
+                            }
+                            if(d.type.indexOf('audio')>-1){
+                                str = 'music_video';
+                            }
+
+                            c('.media_selector .pd20').append(`
+                                <div class="media_file" data-id="${d.id}" data-link="${d.link}">
+                                    <div class="media_file_h">
+                                        <div class="media_file_type">
+                                            <i class="material-icons">${str}</i>
+                                            ${d.type.indexOf('image')>-1 ? `<img src="${d.link}" />` : '' }
+                                        </div>
+                                        <h4>名称: ${d.name}</h4>
+                                    </div>
+                                </div>
+                            `);
+                        });
+                    })
+                });
 
             });
 
@@ -1510,6 +1560,7 @@
                     return dialog('请先选择分类');
                 }
                 
+                /*
                 ( () => new Promise( (resolve,reject) => {
                     offlineContent(postObj,resolve);
                 } ) )().then( ()=> new Promise( () => {
@@ -1529,6 +1580,31 @@
                         location.href = `/panel/contents/collectionsview/?guid=${guid}`;
                     });
                 } ) )
+                */
+                
+                (function(){
+                    return new Promise(function(resolve,reject){
+                        offlineContent(postObj,resolve);
+                    })
+                })().then(function(){
+                    return new Promise(function(resolve,reject){
+                        //post postObj to server => 
+                        if(!guid || !model){
+                            return dialog('提交失败,页面缺少必要参数');
+                        }
+
+                        c.post('/panel/contents/postnew',{
+                            guid:guid,
+                            model:model,
+                            datas:JSON.stringify(postObj)
+                        },function(data){
+                            if(data.msg){
+                                return dialog(data.msg);
+                            }
+                            location.href = `/panel/contents/collectionsview/?guid=${guid}`;
+                        });
+                    })
+                });
 
             });
 
@@ -1536,6 +1612,7 @@
             c(document).on('click','.post_new .submit .editpost_btn',function(){
                 var postObj = {};
 
+                /*
                 ( () => new Promise( (resolve,reject) => {
                     offlineContent(postObj,resolve);
                 } ) )().then( ()=> new Promise( (resolve,reject) => {
@@ -1557,6 +1634,34 @@
                         location.href = `/panel/contents/collectionsview/?guid=${guid}`;
                     });
                 } ) )
+                */
+                
+                (function(){
+                    return new Promise(function(resolve,reject){
+                        offlineContent(postObj,resolve);
+                    })
+                })().then(function(){
+                    return new Promise(function(resolve,reject){
+                        //post postObj to server => edit
+                        if(!guid || !model || !id){
+                            return dialog('提交失败,页面缺少必要参数');
+                        }
+
+                        c.post('/panel/contents/update',{
+                            guid:guid,
+                            model:model,
+                            id:id,
+                            datas:JSON.stringify(postObj)
+                        },function(data){
+                            if(data.msg){
+                                return dialog(data.msg);
+                            }
+
+                            location.href = `/panel/contents/collectionsview/?guid=${guid}`;
+                        });
+                    });
+                })
+                
             });
 
             //remove content

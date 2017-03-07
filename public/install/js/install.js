@@ -88,6 +88,7 @@ asyncArr.prototype = {
         function detect(arr,fn){
             var task1 = new asyncArr(configure);
             
+            /*
             task1.each( (item) => new Promise( (rev1,rej1) => {
                 c.post('/install/configure',item,function(data){
                     if(item.value!='nginx'){
@@ -108,11 +109,36 @@ asyncArr.prototype = {
             } ) ).then(function(){
                 fn && fn(arr);
             });
+            */
+            
+            task1.each(function(item){
+                return new Promise(function(rev1,rej1){
+                    c.post('/install/configure',item,function(data){
+                        if(item.value!='nginx'){
+                            c('.scene:eq(0)').find('.output .pd20').append(`
+                                <p>检查目录权限 <span> ===> </span> ${item.value}  ${data.msg ? `<span class="red">${data.msg}</span>` : `<span class="green">${data.result}</span>` }</p>
+                            `);
+
+                            (!data.msg) && arr.push(true);
+                        }else{
+                            c('.scene:eq(0)').find('.output .pd20').append(`
+                                <p>检查nginx <span> ===> </span> ${ data.msg ? '' : data.result }  ${data.msg ? `<span class="red">${data.msg}</span>` : `<span class="green">nginx配置正常，可直接绑定域名</span>` }</p>
+                            `);
+                        }
+
+                        c('.scene:eq(0)').find('.output')[0].scrollTop = c('.scene:eq(0)').find('.output')[0].scrollHeight;
+                        rev1();
+                    });
+                })
+            }).then(function(){
+                fn && fn(arr);
+            });
         }
         
         function install(arr,fn){
             var task1 = new asyncArr(start);
             
+            /*
             task1.each( (item,index) => new Promise( (rev1,rej1) => {
                 setTimeout(function(){
                     c.post('/install/start',{
@@ -128,6 +154,27 @@ asyncArr.prototype = {
                     });
                 },index*100);
             } ) ).then(function(){
+                fn && fn(arr);
+            });
+            */
+            
+            task1.each(function(item,index){
+                return new Promise(function(rev1,rej1){
+                    setTimeout(function(){
+                        c.post('/install/start',{
+                            step:item
+                        },function(data){
+                            c('.scene:eq(3)').find('.output .pd20').append(`
+                                <p>创建数据 <span> ===> </span> ${item}  ${data.msg ? `<span class="red">失败</span>` : `<span class="green">ok</span>` }</p>
+                            `);
+
+                            (!data.msg) && arr.push(true);
+                            c('.scene:eq(3)').find('.output')[0].scrollTop = c('.scene:eq(3)').find('.output')[0].scrollHeight-10;
+                            rev1();
+                        });
+                    },index*100);
+                });
+            }).then(function(){
                 fn && fn(arr);
             });
         }
