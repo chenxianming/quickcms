@@ -1061,10 +1061,13 @@
                     console.log(e);
                     dialog('读取分类错误或已变动,请重新选择分类.#1');
                     ct_selected = [0];
-                    c('.select_categories').html(`<dl class="ct_group"><dt><span>${categories.datas[0].name}</span><i class="material-icons">keyboard_arrow_down</i></dt><dd><ul></ul></dd></dl>`);
-                    categories.datas.forEach(function(d){
-                        c('.select_categories dd ul').append(`<li>${d.name}</li>`);
-                    });
+                    
+                    if(!c('.categories_actions_del')[0]){
+                        c('.select_categories').html(`<dl class="ct_group"><dt><span>${categories.datas[0].name}</span><i class="material-icons">keyboard_arrow_down</i></dt><dd><ul></ul></dd></dl>`);
+                        categories.datas.forEach(function(d){
+                            c('.select_categories dd ul').append(`<li>${d.name}</li>`);
+                        });
+                    }
                 }
 
                 c(document).on('click','.select_categories dt',function(){
