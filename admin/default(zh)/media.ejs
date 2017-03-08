@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 <div class="media_search fr">
-                    <input type="text" placeholder="输入文件名称或描述" name="keywords" value="<%= infomations.query.keywords || '' %>">
+                    <input type="text" placeholder="输入文件名称或描述" name="keywords" value="<%= (infomations.query && infomations.query.keywords) || '' %>">
                     <div class="media_search_submit"><i class="material-icons">search</i><input type="submit" value=""></div>
                 </div>
                 <div class="clear"></div>
@@ -225,8 +225,8 @@
             return lists;
         }
         
-        var nowPage = <%- infomations.query.page || 1 %>;
-        var pages = <%- infomations.pageContainer.length %>;
+        var nowPage = <%- (infomations.query && infomations.query.page) || 1 %>;
+        var pages = <%- (infomations.pageContainer && infomations.pageContainer.length) || 0 %>;
         var pageContainer = <%- JSON.stringify(infomations.pageContainer) %>;
         
         var listDiv = displayPage(nowPage,pages+1);

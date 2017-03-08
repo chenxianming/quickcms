@@ -67,7 +67,7 @@
     <div class="container">
         <div class="ct">
             <div class="contents_menu">
-                <div class="contents_title"><a href="/panel/contents/collections"><i class="material-icons">apps</i><span>列表集 - <%= infomations.info.name %></span></a></div><ul>
+                <div class="contents_title"><a href="/panel/contents/collections"><i class="material-icons">apps</i><span>列表集</span></a></div><ul>
                     <li><a href="/panel/contents/media"><i class="material-icons">video_library</i><span>媒体库</span></a></li><li><a href="/panel/contents/model"><i class="material-icons">insert_drive_file</i><span>模型</span></a></li><li><a href="/panel/contents/categories"><i class="material-icons">menu</i><span>分类</span></a></li><li><a href="/panel/contents/comments"><i class="material-icons">comment</i><span>留言</span></a></li>
                 </ul>
             </div>
@@ -81,7 +81,7 @@
             <div class="collectionsview">
                 <div class="collectionsview_t">
                     <div class="collections_search fl">
-                        <input type="text" placeholder="输入内容标题" name="keywords" value="<%= infomations.query.keywords || '' %>" />
+                        <input type="text" placeholder="输入内容标题" name="keywords" value="<%= (infomations.query && infomations.query.keywords) || '' %>" />
                         <div class="collections_search_submit"><i class="material-icons">search</i><input type="submit" value="" /></div>
                     </div>
                     <a class="collections_edit fr" href="/panel/contents/collections/edit/?guid=<%= infomations.guid %>">
