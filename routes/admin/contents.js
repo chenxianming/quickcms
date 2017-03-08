@@ -366,6 +366,8 @@ module.exports = {
                 msg:'请填写id'
             });
         }
+        
+        var link;
 
         ;( () => new Promise( (resolve,reject) => {
             var queryStr = `select * from ${configs.pre}media where id = "${id}"`;
@@ -384,6 +386,7 @@ module.exports = {
                         });
                     }
 
+                    link = data[0].link;
                     resolve(data[0]);
                 });
             });
@@ -399,14 +402,14 @@ module.exports = {
 
                     con.end();
 
-                    resolve(data);
+                    resolve();
                 });
             });
 
-        } ) ).then( (data) => new Promise( (resolve,reject) => {
+        } ) ).then( () => new Promise( (resolve,reject) => {
 
             var dp = __dirname.replace('/routes',''),
-                path = dp + '/public' + data.link;
+                path = dp + '/public' + link;
 
             if(!fs.existsSync(path)){
                 return res.json({
