@@ -13,7 +13,7 @@ module.exports = {
     user:'',//mysql用户
     password:'',//mysql密码
     pre:'',//数据表前缀
-    sessionKey:'Pz2647i84nzr7dil6ZUONA6BZAHv8z7313B1',//session key
+    sessionKey:'kRj7CIWYxwVbW6hzfw6u4ybTg2fzMDGLkFlp',//session key
     email:'',//邮箱
     admin:'',//创始人
     pass:'',//创始人密码

@@ -81,7 +81,7 @@
             <div class="collectionsview">
                 <div class="collectionsview_t">
                     <div class="collections_search fl">
-                        <input type="text" placeholder="输入内容标题" name="keywords" value="<%= infomations.query.keywords %>" />
+                        <input type="text" placeholder="输入内容标题" name="keywords" value="<%= infomations.query.keywords || '' %>" />
                         <div class="collections_search_submit"><i class="material-icons">search</i><input type="submit" value="" /></div>
                     </div>
                     <a class="collections_edit fr" href="/panel/contents/collections/edit/?guid=<%= infomations.guid %>">
