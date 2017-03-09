@@ -68,6 +68,9 @@ module.exports = {
             });
             
         } ) ).then( () => new Promise( (resolve,reject)=>{
+            if(typeof infomations['news'] != 'object'){
+                infomations['news'] = [];
+            }
             res.render('admin',{title:'index',err:req.flash('error')[0],infomations:infomations,assets:configs.panelStyle});
         } ) )
 
