@@ -63,7 +63,6 @@ module.exports = {
                 }catch(e){
                     infomations['news'] = [];
                 }
-                
                 resolve();
             });
             
@@ -71,6 +70,7 @@ module.exports = {
             if(typeof infomations['news'] != 'object'){
                 infomations['news'] = [];
             }
+            
             res.render('admin',{title:'index',err:req.flash('error')[0],infomations:infomations,assets:configs.panelStyle});
         } ) )
 

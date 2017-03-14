@@ -39,6 +39,7 @@ QuickCms是专为定制高端网站以及App而设计的一款内容管理系统
 
 如果您的网站非常炫酷,那么这就是QuickCms的宗旨
 
+[演示站点(experimental-pick)](http://experimental-pick.coldnoir.com/)
 
 
 # 功能

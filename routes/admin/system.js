@@ -80,7 +80,7 @@ module.exports = {
         } ) ).then( () => new Promise( (resolve,reject) => {
 
             try{
-
+                
                 var testNginx = execSync('sudo nginx -t');
                 if(testNginx.indexOf('is successful')>-1){
                     infomations['nginx'] = true;
