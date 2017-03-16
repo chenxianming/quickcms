@@ -2,6 +2,8 @@
 
 >QuickCms致力于开发高端网站,App而设计,推动您的想象力
 
+官方网站
+[www.quickcms.cn](http://www.quickcms.cn)
 
 
 目前在于测试阶段
