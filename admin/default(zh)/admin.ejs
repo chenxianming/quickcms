@@ -71,9 +71,12 @@
                 <a href="http://www.quickcms.cn" target="_blank" class="more fr"><i class="material-icons">link</i><span>更多</span></a>
                 <div class="clear"></div>
                 <ul>
-                    <% infomations.news.forEach(function(d){ %>
+                    <% 
+                    var news = infomations.news || [];
+                    news.forEach(function(d){ %>
                         <li><a href="<%= d.url %>"><%= d.title %></a><span>(<%= d.postdate %>)</span></li>
-                    <% }); %>
+                    <% });
+                    %>
                 </ul>
             </div>
         </div>
