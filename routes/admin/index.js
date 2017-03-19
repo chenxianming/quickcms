@@ -11,6 +11,7 @@ module.exports = {
         infomations['username'] = req.session.userData.username;
         infomations['useravatar'] = req.session.userData.avatar;
         infomations['groupsName'] = req.session.userData.groupsName;
+        infomations['news'] = [];
 
         ;( ()=> new Promise( (resolve,reject) => {
 
