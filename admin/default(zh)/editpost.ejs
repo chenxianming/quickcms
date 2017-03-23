@@ -159,7 +159,7 @@
                         <% } %>
                         <% if(d.type=='media-l'){ %>
                     <dl class="custom_field" data-id="<%= d.id %>">
-                        <dt><span>内容图</span></dt><dd>
+                        <dt><span><%= d.name %></span></dt><dd>
                             <div class="pd15 field_type" data-s="media-l">
                                 <% var arr = infomations.contents['field_'+d.id] ? infomations.contents['field_'+d.id].split(',') : []; %>
                                 <% arr.forEach(function(p){ %>

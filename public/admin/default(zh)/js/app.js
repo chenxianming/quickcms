@@ -1172,7 +1172,7 @@
             });
 
             c(document).on('click','.media_add',function(){
-                c('.media_options').before(`
+                c(this).parents('.media_options').before(`
                     <div class="media_input small" data-id="${~~(Math.random() * 100000)}">
                         <input class="insert" name="icon" type="text" placeholder="从媒体库中选择文件" value="">
                         <div class="media_input_btn"><i class="material-icons">subscriptions</i></div>
@@ -1492,6 +1492,8 @@
 
                                 if(val.length){
                                     postObj[`field_${index}`] = val;
+                                }else{
+                                    postObj[`field_${index}`] = [];
                                 }
                             }
                             break;

@@ -74,7 +74,7 @@
                     <% 
                     var news = infomations.news || [];
                     news.forEach(function(d){ %>
-                        <li><a href="<%= d.url %>"><%= d.title %></a><span>(<%= d.postdate %>)</span></li>
+                        <li><a target="_blank" href="<%= d.url %>"><%= d.title %></a><span>(<%= d.postdate %>)</span></li>
                     <% });
                     %>
                 </ul>
