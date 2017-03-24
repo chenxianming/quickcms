@@ -19,7 +19,7 @@ a {
 	text-decoration:none;
 	color:#7e7e7e;
 	font-size:12px;
-	font-family: 'arial','微软雅黑','Material Icons';
+	font-family: 'arial','微软雅黑','Microsoft YaHei','Material Icons';
     font-style:'normal';
 }
 html{
@@ -29,7 +29,7 @@ html{
 body {
 	color:#7e7e7e;
 	font-size:12px;
-	font-family:'arial','微软雅黑','Material Icons';
+	font-family:'arial','微软雅黑','Microsoft YaHei','Material Icons';
 	background:#fff;
     font-style:'normal';
 }
