@@ -1207,6 +1207,7 @@ module.exports = {
             valueArr2 = [];
 
         delete datas.views;
+        delete datas.up;
 
         for(var key in datas){
             var value = datas[key];
