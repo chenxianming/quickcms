@@ -73,9 +73,11 @@
                 <ul>
                     <% 
                     var news = infomations.news || [];
-                    news.forEach(function(d){ %>
-                        <li><a target="_blank" href="<%= d.url %>"><%= d.title %></a><span>(<%= d.postdate %>)</span></li>
-                    <% });
+                    if(news.forEach){
+                        news.forEach(function(d){ %>
+                            <li><a target="_blank" href="<%= d.url %>"><%= d.title %></a><span>(<%= d.postdate %>)</span></li>
+                        <% });
+                    }
                     %>
                 </ul>
             </div>
