@@ -149,12 +149,12 @@ server_name ${obj.domain};
 
                         var name = obj.domain.replace(/ /g,'');
                         
-                        fs.writeFile(global.nginxPath+'sites-enabled/'+name,str,function(err){
+                        fs.writeFile(`${global.nginxPath}sites-enabled/${name}`,str,function(err){
                             if(err){
                                 return console.log(err);
                             }
                             
-                            console.log('done.');
+                            console.log('write done.');
                             
                             execSync(`service nginx reload`);
                         });
