@@ -145,7 +145,7 @@ module.exports = {
                         }
                     `;
                     
-                    console.log(obj.domain);
+                    console.log(str);
                     console.log(global.nginxPath+'/sites-enabled/');
                 }
                 
