@@ -136,15 +136,16 @@ module.exports = {
             setTimeout(function(){
                 if(global.nginxPath){
                     try{
-                        var str = `
-                            server {
-                            listen 80;
-                            server_name ${obj.domain};
-                                location / {
-                                    proxy_pass http://127.0.0.1:${configs.port};
-                                }
-                            }
-                        `;
+                        var str = 
+`
+server {
+listen 80;
+server_name ${obj.domain};
+    location / {
+        proxy_pass http://127.0.0.1:${configs.port};
+    }
+}
+`;
 
                         var name = obj.domain.replace(/ /g,'');
                         
