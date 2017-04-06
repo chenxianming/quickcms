@@ -34,6 +34,7 @@ module.exports = {
                     resolve();
 
                     infomations['datas'] = data[0];
+                    infomations['datas'].port = configs.port || infomations['datas'].port;
                 });
             });
         } ) )().then( () => new Promise( (resolve,reject) => { // get styles
@@ -131,7 +132,24 @@ module.exports = {
             });
         } ) )().then( () => new Promise( (resolve,reject) => {
             updateconfigs({port:obj.port});
+            
             setTimeout(function(){
+                if(global.nginxPath){
+                    var str = `
+                        server {
+                        listen ${configs.port};
+                        server_name ${obj.domain};
+                            location / {
+                                proxy_pass http://127.0.0.1:3020;
+                            }
+                        }
+                    `;
+                    
+                    console.log(os);
+                    console.log(obj.domain);
+                    console.log(global.nginxPath+'/sites-enabled/');
+                }
+                
                 try{
                     if(global.restartTask){
                         return ;
@@ -141,10 +159,6 @@ module.exports = {
                     
                     setTimeout(function(){
                         gloabal.restartTask = null;
-                    },2000);
-                    
-                    setTimeout(function(){
-                        console.log(global.nginxPath);
                     },2000);
                     
                 }catch(e){
