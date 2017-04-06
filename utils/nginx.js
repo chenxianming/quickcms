@@ -1,6 +1,6 @@
 var exec = require('child_process').exec;
 
-modules.export = (callback) => ( () => new Promise( (resolve,reject) => {
+module.exports = (callback) => ( () => new Promise( (resolve,reject) => {
     try{
         exec('nginx -t',(error, st, dt) => {
             if(error){
