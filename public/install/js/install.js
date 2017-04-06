@@ -122,7 +122,7 @@ asyncArr.prototype = {
                             (!data.msg) && arr.push(true);
                         }else{
                             c('.scene:eq(0)').find('.output .pd20').append(`
-                                <p>检查nginx <span> ===> </span> ${ data.msg ? '' : data.result }  ${data.msg ? `<span class="red">${data.msg}</span>` : `<span class="green">${data.msg}</span>` }</p>
+                                <p>检查nginx <span> ===> </span> ${data.msg ? `<span class="red">${data.msg}</span>` : `<span class="green">${data.result}</span>` }</p>
                             `);
                         }
 
