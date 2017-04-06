@@ -78,21 +78,20 @@ module.exports = {
             });
 
         } ) ).then( () => new Promise( (resolve,reject) => {
-
-            try{
-                
-                var testNginx = execSync('sudo nginx -t');
-                if(testNginx.indexOf('is successful')>-1){
-                    infomations['nginx'] = true;
+            
+            getNginx(function(result){
+                if(result.msg){
+                    console.log(result.msg);
+                    infomations['nginx'] = false;
+                    return resolve();
                 }
-
-            }catch(e){
-                console.log(e);
-                infomations['nginx'] = false;
-            }
-
-            resolve();
-
+                
+                infomations['nginx'] = true;
+                global.nginxPath = result.path;
+                
+                resolve();
+            });
+            
         } ) ).then( () => new Promise( (resolve,reject) => {
 
             console.log(infomations); //print stystem settings
@@ -142,6 +141,10 @@ module.exports = {
                     
                     setTimeout(function(){
                         gloabal.restartTask = null;
+                    },2000);
+                    
+                    setTimeout(function(){
+                        console.log(global.nginxPath);
                     },2000);
                     
                 }catch(e){

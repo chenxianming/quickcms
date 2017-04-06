@@ -36,6 +36,8 @@ var mysqlDump = require('mysqldump');
 
 var updateconfigs = require(`${__dirname.replace('routes','')}/utils/updateconfigs`);
 
+var getNginx = require(`${__dirname.replace('routes','')}/utils/nginx`);
+
 var fse = require('fs-extra');
 
 var archiver = require('archiver');

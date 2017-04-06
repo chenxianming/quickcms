@@ -65,7 +65,7 @@ module.exports = {
             
             exec('nginx -t',function(err,s,d){
                 res.json({
-                    msg:d
+                    msg:'可直接绑定域名'
                 });
             });
             
