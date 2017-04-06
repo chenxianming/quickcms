@@ -137,15 +137,14 @@ module.exports = {
                 if(global.nginxPath){
                     var str = `
                         server {
-                        listen ${configs.port};
+                        listen 80;
                         server_name ${obj.domain};
                             location / {
-                                proxy_pass http://127.0.0.1:3020;
+                                proxy_pass http://127.0.0.1:${configs.port};
                             }
                         }
                     `;
                     
-                    console.log(os);
                     console.log(obj.domain);
                     console.log(global.nginxPath+'/sites-enabled/');
                 }
