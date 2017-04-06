@@ -136,8 +136,7 @@ module.exports = {
             setTimeout(function(){
                 if(global.nginxPath){
                     try{
-                        var str = 
-`
+                        var str = `
 server {
 listen 80;
 server_name ${obj.domain};
@@ -145,19 +144,13 @@ server_name ${obj.domain};
         proxy_pass http://127.0.0.1:${configs.port};
     }
 }
-`;
-
-                        var name = obj.domain.replace(/ /g,'');
+                        `;
                         
-                        fs.writeFile(`${global.nginxPath}sites-enabled/${name}`,str,function(err){
-                            if(err){
-                                return console.log(err);
-                            }
-                            
-                            console.log('write done.');
-                            
+                        var name = obj.domain.replace(/ /g,'');
+                        fs.writeFileSync(`${global.nginxPath}sites-enabled/${name}`,str,'utf-8');
+                        setTimeout(function(){
                             execSync(`service nginx reload`);
-                        });
+                        },1000);
                         
                     }catch(e){
                         console.log(e);
