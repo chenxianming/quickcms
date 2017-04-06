@@ -135,18 +135,30 @@ module.exports = {
             
             setTimeout(function(){
                 if(global.nginxPath){
-                    var str = `
-                        server {
-                        listen 80;
-                        server_name ${obj.domain};
-                            location / {
-                                proxy_pass http://127.0.0.1:${configs.port};
+                    try{
+                        var str = `
+                            server {
+                            listen 80;
+                            server_name ${obj.domain};
+                                location / {
+                                    proxy_pass http://127.0.0.1:${configs.port};
+                                }
                             }
-                        }
-                    `;
-                    
-                    console.log(str);
-                    console.log(global.nginxPath+'/sites-enabled/');
+                        `;
+
+                        var name = obj.domain.replace(/ /g,'');
+                        
+                        fs.writeFile(global.nginxPath+'sites-enabled/'+name,str,function(err){
+                            if(err){
+                                return console.log(err);
+                            }
+                            
+                            execSync(`service nginx reload`);
+                        });
+                        
+                    }catch(e){
+                        console.log(e);
+                    }
                 }
                 
                 try{
