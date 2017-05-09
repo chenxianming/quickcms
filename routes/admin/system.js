@@ -148,10 +148,8 @@ server_name ${obj.domain};
                         
                         var name = obj.domain.replace(/ /g,'');
                         fs.writeFileSync(`${global.nginxPath}sites-enabled/${name}`,str,'utf-8');
-                        setTimeout(function(){
-                            execSync(`service nginx reload`);
-                        },1000);
                         
+                        execSync(`service nginx reload`);
                     }catch(e){
                         console.log(e);
                     }

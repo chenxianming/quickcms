@@ -70,7 +70,7 @@ module.exports = function(){
         
     } ) ).then( ()=> new Promise( (resolve,reject) => {
         
-        console.log(`task "check original account" is completed ==> (${new Date().getTime() - startTime} (ms))`);
+        console.log(`task "check original account" was completed ==> (${new Date().getTime() - startTime} (ms))`);
         
     } ) )
     
@@ -186,7 +186,7 @@ module.exports = function(){
         
     } ) ).then( () => new Promise( (resolve,reject) => {
 
-        console.log(`task "fixed user posts" is completed ==> (${new Date().getTime() - startTime} (ms))`);
+        console.log(`task "fixed user posts" was completed ==> (${new Date().getTime() - startTime} (ms))`);
         
     } ) );
     
@@ -195,7 +195,7 @@ module.exports = function(){
         updaterouter();
         resolve();
     } ) )().then( () => new Promise( (resolve,reject) => {
-        console.log(`task "update dynamic routes" is completed ==> (${new Date().getTime() - startTime} (ms))`);
+        console.log(`task "update dynamic routes" was completed ==> (${new Date().getTime() - startTime} (ms))`);
     } ) );
     
     //clear comments
@@ -275,7 +275,7 @@ module.exports = function(){
         } );
         
     } ) ).then( () => new Promise( (resolve,reject) => {
-        console.log(`task "clear comments" is completed ==> (${new Date().getTime() - startTime} (ms))`);
+        console.log(`task "clear comments" was completed ==> (${new Date().getTime() - startTime} (ms))`);
     } ) );
     
     //clear cache
@@ -291,7 +291,7 @@ module.exports = function(){
         resolve();
         
     } ) )().then( () => new Promise( (resolve,reject) => {
-        console.log(`task "clear cache" is completed ==> (${new Date().getTime() - startTime} (ms))`);
+        console.log(`task "clear cache" was completed ==> (${new Date().getTime() - startTime} (ms))`);
     } ) );
     
     //get token
@@ -302,7 +302,7 @@ module.exports = function(){
         });
         
     } ) )().then( () => new Promise( (resolve,reject) => {
-        console.log(`task "get token" is completed ==> (${new Date().getTime() - startTime} (ms))`);
+        console.log(`task "get token" was completed ==> (${new Date().getTime() - startTime} (ms))`);
         
         if(configs.account && configs.accountpass){
             resolve();
@@ -318,7 +318,7 @@ module.exports = function(){
             resolve();
         });
     } ) ).then( () => new Promise( (resolve,reject) => {
-        console.log(`task "get token" is completed ==> (${new Date().getTime() - startTime} (ms))`);
+        console.log(`task "get token" was completed ==> (${new Date().getTime() - startTime} (ms))`);
     } ) );
     
     
@@ -336,7 +336,7 @@ module.exports = function(){
             resolve();
         });
     } ) )().then( () => new Promise( (resolve,reject) => {
-        console.log(`task "get news" is completed ==> (${new Date().getTime() - startTime} (ms))`);
+        console.log(`task "get news" was completed ==> (${new Date().getTime() - startTime} (ms))`);
     } ) );
     
     //get ip
@@ -351,7 +351,7 @@ module.exports = function(){
             resolve();
         });
     } ) )().then( () => new Promise( (resolve,reject) => {
-        console.log(`task "get ip address" is completed ==> (${new Date().getTime() - startTime} (ms))`);
+        console.log(`task "get ip address" was completed ==> (${new Date().getTime() - startTime} (ms))`);
     } ) );
     
 }
