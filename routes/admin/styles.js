@@ -388,11 +388,13 @@ module.exports = {
                 try{
                     var data = JSON.parse(data);
                 }catch(e){
-                    return res.json('分享失败');
+                    req.flash('error','分享失败');
+                    return res.redirect('/panel/styles');
                 }
                 
                 if(data.msg){
-                    return res.json(data.msg);
+                    req.flash('error',data.msg);
+                    return res.redirect('/panel/styles');
                 }
                 
                 
