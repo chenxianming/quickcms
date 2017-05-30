@@ -397,7 +397,6 @@ module.exports = {
                     return res.redirect('/panel/styles');
                 }
                 
-                
                 id = data.result;
                 
                 resolve();

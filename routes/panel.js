@@ -13,174 +13,184 @@ if(fs.existsSync(installLock)){
     setInterval(autoRun,20 * 60 * 1000);//20 * 60 * 1000 (20minutes)
 }
 
-//login
-router.get('/login',require(`${__dirname}/admin/login`).login);
+const panelRouters = {
+    login:require(`${__dirname}/admin/login`),
+    middleware:require(`${__dirname}/admin/middleware`),
+    index:require(`${__dirname}/admin/index`),
+    system:require(`${__dirname}/admin/system`),
+    contents:require(`${__dirname}/admin/contents`),
+    users:require(`${__dirname}/admin/users`),
+    styles:require(`${__dirname}/admin/styles`),
+    extensions:require(`${__dirname}/admin/extensions`)
+}
 
-router.post('/login',require(`${__dirname}/admin/login`).loginPost);
+//login
+router.get('/login',panelRouters.login.login);
+
+router.post('/login',panelRouters.login.loginPost);
 
 //middle ware for login
-router.use(require(`${__dirname}/admin/middleware`).login);
+router.use(panelRouters.middleware.login);
 
 //middle ware for roles
-router.use(require(`${__dirname}/admin/middleware`).roles);
+router.use(panelRouters.middleware.roles);
 
 //middle ware for update dymicRoutes
-router.use(require(`${__dirname}/admin/middleware`).updateDymicRoutes);
+router.use(panelRouters.middleware.updateDymicRoutes);
 
 //index
-router.get('/',require(`${__dirname}/admin/index`).panel);
+router.get('/',panelRouters.index.panel);
 router.get('/avg', (req, res, next) => res.send(os.loadavg()) );
 
-
 //system
-router.get('/system',require(`${__dirname}/admin/system`).system);
-router.post('/system',require(`${__dirname}/admin/system`).systemPost);
+router.get('/system',panelRouters.system.system);
+router.post('/system',panelRouters.system.systemPost);
 
 //contents
-router.get('/contents',require(`${__dirname}/admin/contents`).contents);
-router.get('/contents/media',require(`${__dirname}/admin/contents`).media);
-router.post('/contents/media',require(`${__dirname}/admin/contents`).mediaPost);
+router.get('/contents',panelRouters.contents.contents);
+router.get('/contents/media',panelRouters.contents.media);
+router.post('/contents/media',panelRouters.contents.mediaPost);
 
 //upload
-router.post('/contents/media/upload',multipartMiddleware,require(`${__dirname}/admin/contents`).upload);
+router.post('/contents/media/upload',multipartMiddleware,panelRouters.contents.upload);
 
 //getmedia
-router.get('/contents/getmedia/:id',require(`${__dirname}/admin/contents`).getMedia);
+router.get('/contents/getmedia/:id',panelRouters.contents.getMedia);
 
 //remove
-router.post('/remove',require(`${__dirname}/admin/contents`).remove);
+router.post('/remove',panelRouters.contents.remove);
 
 //edit description
-router.post('/editdescription',require(`${__dirname}/admin/contents`).editdescription);
+router.post('/editdescription',panelRouters.contents.editdescription);
 
 //collections
-router.get('/contents/collections',require(`${__dirname}/admin/contents`).collections);
+router.get('/contents/collections',panelRouters.contents.collections);
 
-router.get('/contents/collectionsview',require(`${__dirname}/admin/contents`).collectionsview);
+router.get('/contents/collectionsview',panelRouters.contents.collectionsview);
 
 //edit detail
-router.get('/contents/collectionsdetail',require(`${__dirname}/admin/contents`).collectionsdetail);
+router.get('/contents/collectionsdetail',panelRouters.contents.collectionsdetail);
 
 //up content
-router.post('/contents/up',require(`${__dirname}/admin/contents`).upcontent);
+router.post('/contents/up',panelRouters.contents.upcontent);
 
-router.get('/contents/postnew',require(`${__dirname}/admin/contents`).postnew);
+router.get('/contents/postnew',panelRouters.contents.postnew);
 
 //recivepostobject
-router.post('/contents/postnew',require(`${__dirname}/admin/contents`).recivepostobject);
+router.post('/contents/postnew',panelRouters.contents.recivepostobject);
 
 //update post
-router.post('/contents/update',require(`${__dirname}/admin/contents`).updatepost);
+router.post('/contents/update',panelRouters.contents.updatepost);
 
 //remove collections
-router.post('/contents/collections/remove',require(`${__dirname}/admin/contents`).removecollections);
+router.post('/contents/collections/remove',panelRouters.contents.removecollections);
 
 //model
-router.get('/contents/model',require(`${__dirname}/admin/contents`).model);
+router.get('/contents/model',panelRouters.contents.model);
 
 //model new
-router.get('/contents/model/new',require(`${__dirname}/admin/contents`).modelnew);
-router.post('/contents/model/new',require(`${__dirname}/admin/contents`).modelnewPost);
+router.get('/contents/model/new',panelRouters.contents.modelnew);
+router.post('/contents/model/new',panelRouters.contents.modelnewPost);
 
 //model edit
-router.get('/contents/model/edit',require(`${__dirname}/admin/contents`).modelEdit);
+router.get('/contents/model/edit',panelRouters.contents.modelEdit);
 
 //model update
-router.post('/contents/model/edit',require(`${__dirname}/admin/contents`).modelUpdate);
+router.post('/contents/model/edit',panelRouters.contents.modelUpdate);
 
 //model remove
-router.get('/contents/model/remove',require(`${__dirname}/admin/contents`).modelRemove);
+router.get('/contents/model/remove',panelRouters.contents.modelRemove);
 
 //model export
-router.get('/contents/model/export/:guid',require(`${__dirname}/admin/contents`).modelExport);
+router.get('/contents/model/export/:guid',panelRouters.contents.modelExport);
 
 //import model
-router.post('/contents/model/import',multipartMiddlewareTemp,require(`${__dirname}/admin/contents`).importModel);
+router.post('/contents/model/import',multipartMiddlewareTemp,panelRouters.contents.importModel);
 
 //collections new
-router.get('/contents/collections/new',require(`${__dirname}/admin/contents`).collectionsNew);
-router.post('/contents/collections/new',require(`${__dirname}/admin/contents`).collectionsNewPost);
+router.get('/contents/collections/new',panelRouters.contents.collectionsNew);
+router.post('/contents/collections/new',panelRouters.contents.collectionsNewPost);
 
 //edit collection
-router.get('/contents/collections/edit',require(`${__dirname}/admin/contents`).editCollection);
-router.post('/contents/collections/edit',require(`${__dirname}/admin/contents`).editCollectionPost);
+router.get('/contents/collections/edit',panelRouters.contents.editCollection);
+router.post('/contents/collections/edit',panelRouters.contents.editCollectionPost);
 
 //remove collection
-router.post('/contents/collections/removecollection',require(`${__dirname}/admin/contents`).removeCollection);
+router.post('/contents/collections/removecollection',panelRouters.contents.removeCollection);
 
 //categories
-router.get('/contents/categories',require(`${__dirname}/admin/contents`).categories);
-router.post('/contents/categories',require(`${__dirname}/admin/contents`).categoriesPost);
+router.get('/contents/categories',panelRouters.contents.categories);
+router.post('/contents/categories',panelRouters.contents.categoriesPost);
 
 //comments
-router.get('/contents/comments',require(`${__dirname}/admin/contents`).comments);
+router.get('/contents/comments',panelRouters.contents.comments);
 
 //comments detail
-router.get('/contents/comments/detail',require(`${__dirname}/admin/contents`).commentsDetail);
+router.get('/contents/comments/detail',panelRouters.contents.commentsDetail);
 
 //comments remove
-router.get('/contents/comments/remove',require(`${__dirname}/admin/contents`).commentsRemove);
+router.get('/contents/comments/remove',panelRouters.contents.commentsRemove);
 
-router.post('/contents/comments/removeall',require(`${__dirname}/admin/contents`).removeall);
+router.post('/contents/comments/removeall',panelRouters.contents.removeall);
 
 //users
-router.get('/users',require(`${__dirname}/admin/users`).users);
+router.get('/users',panelRouters.users.users);
 
 //user new
-router.get('/users/new',require(`${__dirname}/admin/users`).userNew);
-router.post('/users/new',require(`${__dirname}/admin/users`).userNewPost);
+router.get('/users/new',panelRouters.users.userNew);
+router.post('/users/new',panelRouters.users.userNewPost);
 
 //user edit
-router.get('/users/edit',require(`${__dirname}/admin/users`).userEdit);
-router.get('/users/person',require(`${__dirname}/admin/users`).person);
+router.get('/users/edit',panelRouters.users.userEdit);
+router.get('/users/person',panelRouters.users.person);
 
 //user remove
-router.post('/users/remove',require(`${__dirname}/admin/users`).userRemove);
+router.post('/users/remove',panelRouters.users.userRemove);
 
 //upload avatar
-router.post('/users/upload/:username',multipartMiddlewareAvatar,require(`${__dirname}/admin/users`).uploadAvatar);
+router.post('/users/upload/:username',multipartMiddlewareAvatar,panelRouters.users.uploadAvatar);
 
 //update profile
-router.post('/users/edit',require(`${__dirname}/admin/users`).updateProfile);
+router.post('/users/edit',panelRouters.users.updateProfile);
 
 //groups
-router.get('/groups',require(`${__dirname}/admin/users`).groups);
+router.get('/groups',panelRouters.users.groups);
 
 //groups new
-router.get('/groups/new',require(`${__dirname}/admin/users`).groupsNew);
-router.post('/groups/new',require(`${__dirname}/admin/users`).groupsNewPost);
+router.get('/groups/new',panelRouters.users.groupsNew);
+router.post('/groups/new',panelRouters.users.groupsNewPost);
 
 //groups edit
-router.get('/groups/edit',require(`${__dirname}/admin/users`).groupsEdit);
-router.post('/groups/edit',require(`${__dirname}/admin/users`).groupsEditPost);
+router.get('/groups/edit',panelRouters.users.groupsEdit);
+router.post('/groups/edit',panelRouters.users.groupsEditPost);
 
 //groups remove
-router.post('/groups/remove',require(`${__dirname}/admin/users`).groupsRemove);
+router.post('/groups/remove',panelRouters.users.groupsRemove);
 
 //styles
-router.get('/styles',require(`${__dirname}/admin/styles`).styles);
-router.get('/styles/setdefault',require(`${__dirname}/admin/styles`).setdefault);
-router.get('/styles/canceldefault',require(`${__dirname}/admin/styles`).canceldefault);
-router.get('/styles/new',require(`${__dirname}/admin/styles`).new);
-router.post('/styles/new',require(`${__dirname}/admin/styles`).post);
-router.get('/styles/complete',require(`${__dirname}/admin/styles`).complete);
-router.get('/styles/edit',require(`${__dirname}/admin/styles`).edit);
-router.post('/styles/edit',require(`${__dirname}/admin/styles`).editPost);
-router.post('/styles/remove',require(`${__dirname}/admin/styles`).remove);
-router.get('/styles/share',require(`${__dirname}/admin/styles`).share);
-router.get('/styles/center',require(`${__dirname}/admin/styles`).center);
-router.post('/styles/center/get',require(`${__dirname}/admin/styles`).get);
+router.get('/styles',panelRouters.styles.styles);
+router.get('/styles/setdefault',panelRouters.styles.setdefault);
+router.get('/styles/canceldefault',panelRouters.styles.canceldefault);
+router.get('/styles/new',panelRouters.styles.new);
+router.post('/styles/new',panelRouters.styles.post);
+router.get('/styles/complete',panelRouters.styles.complete);
+router.get('/styles/edit',panelRouters.styles.edit);
+router.post('/styles/edit',panelRouters.styles.editPost);
+router.post('/styles/remove',panelRouters.styles.remove);
+router.get('/styles/share',panelRouters.styles.share);
+router.get('/styles/center',panelRouters.styles.center);
+router.post('/styles/center/get',panelRouters.styles.get);
 
 //extensions
-router.get('/extensions',require(`${__dirname}/admin/extensions`).extensions);
-router.get('/extensions/view',require(`${__dirname}/admin/extensions`).view);
-router.get('/extensions/set',require(`${__dirname}/admin/extensions`).set);
-router.post('/extensions/remove',require(`${__dirname}/admin/extensions`).remove);
-router.get('/extensions/actions',require(`${__dirname}/admin/extensions`).actions);
-router.post('/extensions/actions',require(`${__dirname}/admin/extensions`).actionsPost);
-router.post('/extensions/upload/:guid',multipartMiddlewareTemp,require(`${__dirname}/admin/extensions`).upload);
-router.get('/extensions/center',require(`${__dirname}/admin/extensions`).center);
-router.post('/extensions/center/add',require(`${__dirname}/admin/extensions`).add);
+router.get('/extensions',panelRouters.extensions.extensions);
+router.get('/extensions/view',panelRouters.extensions.view);
+router.get('/extensions/set',panelRouters.extensions.set);
+router.post('/extensions/remove',panelRouters.extensions.remove);
+router.get('/extensions/actions',panelRouters.extensions.actions);
+router.post('/extensions/actions',panelRouters.extensions.actionsPost);
+router.post('/extensions/upload/:guid',multipartMiddlewareTemp,panelRouters.extensions.upload);
+router.get('/extensions/center',panelRouters.extensions.center);
+router.post('/extensions/center/add',panelRouters.extensions.add);
 
 //logout
 router.get('/logout',require(`${__dirname}/admin/login`).logout);
