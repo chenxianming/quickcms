@@ -10,7 +10,7 @@
 <br />
 演示
 
-[test.quickcms.cn/](http://test.quickcms.cn/)
+[test.quickcms.cn](http://test.quickcms.cn/)
 
 管理
 
@@ -44,6 +44,16 @@ QuickCms使用nodejs+mysql编写
 
     ./bin/quickcms -e
     
+更新
+
+QuickCms的功能部分为模块化,版本更新为核心代码的维护,所以在核心文件未改动的前提下,使用Git将文件更新,即
+
+进入QuickCms目录下
+
+    git pull
+
+
+<br />
 <br />
 
 # 介绍
