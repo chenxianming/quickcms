@@ -53,11 +53,13 @@ QuickCms是专为定制高端网站以及App而设计的一款内容管理系统
 如果您的网站非常炫酷,那么这就是QuickCms的宗旨
 
 <br />
+
 [演示网站(Coldnoir)](http://www.coldnoir.com/)
 
 [演示站点(experimental-pick)](http://experimental-pick.coldnoir.com/)
 
 <br /><br />
+
 # 功能
 
 * 无限制内容分类,并且能自定义路由
@@ -72,6 +74,7 @@ QuickCms是专为定制高端网站以及App而设计的一款内容管理系统
 * 拥有拓展功能 QuickCms会不断为使用者开发新的功能
 
 <br />
+
 # 运行测试
 
 QuickCms仅支持在linux上运行,windows版本敬请期待
