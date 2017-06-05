@@ -940,7 +940,14 @@ span.content_block_op_link{ color:#fff; }
 .comments_contents_info div{ display:inline-block; }
 .comments_contents_info i{ font-size:14px; display:inline-block; vertical-align:middle; margin-right:5px; }
 .comments_contents_info .pd20{ padding:0 20px; }
-.comments_contents_info span{ display:inline-block; vertical-align:middle; margin-right:10px; }
+.comments_contents_info span{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+}
 .comments_contents_detail .pd20{ min-height:110px; }
 .comments_contents_border{ border-top:1px solid #eff0f1; }
 
