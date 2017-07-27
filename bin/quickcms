@@ -14,7 +14,7 @@ function randomStr(length){
     var arr = str.split('');
     
     var chunk = '';
-    for(var i = 0;i<arr.length;i++){
+    for(var i = 0;i<length;i++){
         var t = arr[~~(Math.random() * arr.length-1)],
             T = Math.random() < .5 ? t : t.toLocaleUpperCase();
         chunk += T;
