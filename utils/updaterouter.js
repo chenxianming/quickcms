@@ -389,7 +389,12 @@ module.exports = function(){
 
             callback ? res.send(\`\${callback}(\${JSON.stringify(infomations)})\`) : res.json(infomations);
 
-        } ) )
+        } ) ).catch( (e) => {
+            var err = {
+                msg:e
+            }
+            callback ? res.send(\`\${callback}(\${JSON.stringify(err)})\`) : res.json(err);
+        } );
     }
         `;
         
@@ -546,7 +551,12 @@ module.exports = function(){
 
             callback ? res.send(\`\${callback}(\${JSON.stringify(infomations)})\`) : res.json(infomations);
 
-        } ) )
+        } ) ).catch( (e) => {
+            var err = {
+                msg:e
+            }
+            callback ? res.send(\`\${callback}(\${JSON.stringify(err)})\`) : res.json(err);
+        } );
 
     }
         `;
@@ -810,7 +820,12 @@ module.exports = function(){
 
             res.json(infomations);
 
-        } ) )
+        } ) ).catch( (e) => {
+            var err = {
+                msg:e
+            }
+            callback ? res.send(\`\${callback}(\${JSON.stringify(err)})\`) : res.json(err);
+        } );
     }
         `;
         
@@ -967,7 +982,12 @@ module.exports = function(){
             
             res.json(infomations);
 
-        } ) )
+        } ) ).catch( (e) => {
+            var err = {
+                msg:e
+            }
+            callback ? res.send(\`\${callback}(\${JSON.stringify(err)})\`) : res.json(err);
+        } );
     }
         `;
         
@@ -1346,7 +1366,12 @@ module.exports = function(){
 
             res.render(templateFile,{title:titleChunk,system:system,infomations:infomations,position:arr,path:assets});
 
-        } ) )
+        } ) ).catch( (e) => {
+            var err = {
+                msg:e
+            }
+            callback ? res.send(\`\${callback}(\${JSON.stringify(err)})\`) : res.json(err);
+        } );
     }
         `;
         
@@ -2262,7 +2287,12 @@ module.exports = function(router){
         } ) ).then( () => new Promise( (resolve,reject) => {
             articlevisit(model,id);
             res.json(infomations);
-        } ) )
+        } ) ).catch( (e) => {
+            var err = {
+                msg:e
+            }
+            callback ? res.send(\`\${callback}(\${JSON.stringify(err)})\`) : res.json(err);
+        } );
     });
 
     //get system configs
