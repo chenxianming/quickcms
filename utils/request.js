@@ -13,7 +13,8 @@ module.exports = {
         request({
             url:url,
             method:'get',
-            jar:j
+            jar:j,
+            timeout:3000
         },function(err,data){
             if(err){
                 return (typeof args[args.length-1] == 'function') && args[args.length-1](err);
@@ -27,7 +28,8 @@ module.exports = {
             url:url,
             method:'post',
             form:obj,
-            jar:j
+            jar:j,
+            timeout:3000
         },function(err,data){
             if(err){
                 return (typeof args[args.length-1] == 'function') && args[args.length-1](err);
@@ -41,7 +43,8 @@ module.exports = {
             url:url,
             method:'post',
             formData:obj,
-            jar:j
+            jar:j,
+            timeout:3000
         },function(err,data){
             if(err){
                 return (typeof args[args.length-1] == 'function') && args[args.length-1](err);

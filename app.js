@@ -23,6 +23,16 @@ if(installExist){
     var mysqlStore = require('express-mysql-session')(session);
 }
 
+//set limiter
+var RateLimit = require('express-rate-limit');
+var limiter = new RateLimit({
+    windowMs:1000,
+    max:100,
+    delayMs:0,
+    message:'request limit'
+});
+app.use(limiter);
+
 var useragent = require('express-useragent');
 app.use(useragent.express());
 
