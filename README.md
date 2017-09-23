@@ -51,6 +51,7 @@ QuickCms的功能部分为模块化,版本更新为核心代码的维护,所以�
 进入QuickCms目录下
 
     git pull
+    npm install
 
 
 <br />
