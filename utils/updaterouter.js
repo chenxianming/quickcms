@@ -2082,10 +2082,11 @@ module.exports = function(router){
             if(comment){
                 var datas = eval(comment.datas);
                 datas.push(obj);
-                
-                var queryStr = \`update ${configs.pre}comments set lastupdate = "\${date}", datas = '\${JSON.stringify(datas)}' where model = "\${model}" and ctid = "\${id}"\`;
 
                 connect(function(con){
+                    
+                    var queryStr = \`update ${configs.pre}comments set lastupdate = "\${date}", datas = \${con.escape(JSON.stringify(datas))} where model = "\${model}" and ctid = "\${id}"\`;
+
                     var queryFn = con.query(queryStr,function(err,data){
                         if(err){
                             return res.json({
