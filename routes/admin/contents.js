@@ -3020,11 +3020,10 @@ module.exports = {
             }else{
 
                 var dataStr = JSON.stringify(data);
-                dataStr = strFilter(dataStr);
-
+                
                 connect(function(con){
-                    
-                    var queryStr = `update ${configs.pre}comments set datas = ${con.escape(dataStr)} where id = ${id}`;
+                    dataStr = con.escape(dataStr);
+                    var queryStr = `update ${configs.pre}comments set datas = "${dataStr}" where id = ${id}`;
                     
                     var queryFn = con.query(queryStr,function(err,data){
                         if(err){
