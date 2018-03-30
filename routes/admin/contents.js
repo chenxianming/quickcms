@@ -3018,13 +3018,10 @@ module.exports = {
                 });
 
             }else{
-
-                var dataStr = JSON.stringify(data);
-                dataStr = strFilter(dataStr);
-
-                var queryStr = `update ${configs.pre}comments set datas = "${dataStr}" where id = ${id}`;
-
+                
                 connect(function(con){
+                    var queryStr = `update ${configs.pre}comments set datas = ${ con.escape( JSON.stringify(data) ) } where id = ${id}`;
+                    
                     var queryFn = con.query(queryStr,function(err,data){
                         if(err){
                             throw err;
